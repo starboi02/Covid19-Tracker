@@ -1,0 +1,198 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical">
+<androidx.appcompat.widget.Toolbar
+    android:id="@+id/toolbar"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:theme="@style/BasicTheme"
+    android:background="@color/colorPrimary"
+    app:layout_constraintEnd_toEndOf="parent"
+    app:layout_constraintStart_toStartOf="parent"
+    app:layout_constraintTop_toTopOf="parent" />
+<ScrollView
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fillViewport="true">
+<LinearLayout
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingLeft="32dp"
+    android:paddingTop="32dp"
+    android:paddingBottom="32dp"
+    android:paddingRight="32dp"
+    >
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Covid-19 Outbreak"
+        android:textSize="30sp"
+        android:gravity="center"
+        android:layout_marginBottom="32dp"
+        />
+
+     <LinearLayout
+         android:layout_width="match_parent"
+         android:layout_height="match_parent"
+         android:orientation="vertical">
+
+    <TextView
+        android:layout_width="match_parent"
+        android:padding="8dp"
+        android:layout_height="wrap_content"
+        android:textSize="20sp"
+        android:layout_marginBottom="8dp"
+        android:justificationMode="inter_word"
+        android:text="Coronavirus disease 2019 (COVID-19) is an infectious disease caused by severe acute respiratory syndrome coronavirus The disease was first identified in December 2019 in Wuhan, and has spread globally, resulting in the ongoing coronavirus pandemic."
+        />
+
+         <TextView
+             android:layout_width="match_parent"
+             android:layout_height="wrap_content"
+             android:justificationMode="inter_word"
+             android:padding="8dp"
+             android:text="The first case of the 2019–20 coronavirus pandemic in India was reported on 30 January 2020, originating from China. As of 28 April 2020, the Ministry of Health and Family Welfare have confirmed a total of 29,974 cases, 7,027 recoveries (including 1 migration) and 937 deaths in the country."
+             android:textSize="20sp" />
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="8dp"
+            android:textSize="30sp"
+            android:gravity="center"
+            android:text="Symptoms"
+            />
+    <TextView
+        android:layout_width="match_parent"
+        android:padding="8dp"
+        android:layout_height="wrap_content"
+        android:textSize="20sp"
+        android:justificationMode="inter_word"
+        android:text="COVID-19 affects different people in different ways. Most infected people will develop mild to moderate symptoms. Common symptoms:"/>
+
+    <TableLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+
+        android:layout_marginLeft="32dp"
+        >
+        <TableRow>
+
+            <TextView
+                android:layout_column="1"
+                android:layout_width="wrap_content"
+                android:text="\u2022   fever"
+                />
+        </TableRow>
+        <TableRow>
+
+            <TextView
+                android:layout_column="1"
+                android:layout_width="wrap_content"
+                android:text="\u2022   tiredness"
+                />
+        </TableRow>
+        <TableRow>
+            <TextView
+                android:layout_column="1"
+                android:layout_width="wrap_content"
+                android:text="\u2022   dry cough"
+                />
+        </TableRow>
+    </TableLayout>
+        <TextView
+            android:padding="8dp"
+            android:text="Some people may experience:"
+            android:textSize="20sp"
+            android:layout_height="wrap_content"
+            android:layout_width="match_parent"
+            />
+         <TableLayout
+             android:layout_width="wrap_content"
+             android:layout_height="wrap_content"
+             android:textSize="25sp"
+             android:layout_marginLeft="32dp"
+             >
+             <TableRow>
+
+                 <TextView
+                     android:layout_column="1"
+                     android:layout_width="wrap_content"
+                     android:text="\u2022   aches and pains"
+                     />
+             </TableRow>
+             <TableRow>
+
+                 <TextView
+                     android:layout_column="1"
+                     android:layout_width="wrap_content"
+                     android:text="\u2022   runny nose"
+                     />
+             </TableRow>
+             <TableRow>
+                 <TextView
+                     android:layout_column="1"
+                     android:layout_width="wrap_content"
+                     android:text="\u2022   nasal congestion"
+                     />
+             </TableRow>
+             <TableRow>
+                 <TextView
+                     android:layout_column="1"
+                     android:layout_width="wrap_content"
+                     android:text="\u2022   diarrhoea"
+                     />
+             </TableRow>
+             <TableRow>
+                 <TextView
+                     android:layout_column="1"
+                     android:layout_width="wrap_content"
+                     android:text="\u2022   sore throat"
+                     />
+             </TableRow>
+
+         </TableLayout>
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="8dp"
+            android:text="Some Useful Links"
+            android:gravity="center"
+
+            android:textSize="30sp"
+
+
+            />
+                 <TextView
+                     android:layout_height="wrap_content"
+                     android:padding="8dp"
+                     android:textSize="20sp"
+                     android:layout_width="wrap_content"
+                     android:text="@string/who"
+                     android:id="@+id/link1"
+                     />
+
+
+                 <TextView
+                     android:layout_height="wrap_content"
+                     android:padding="8dp"
+                     android:layout_width="wrap_content"
+                     android:text="@string/mhfo"
+                     android:id="@+id/link2"
+                     android:textSize="20sp"
+                     />
+
+                 <TextView
+                     android:layout_height="wrap_content"
+                     android:padding="8dp"
+                     android:layout_width="wrap_content"
+                     android:text="@string/guide"
+                     android:id="@+id/link3"
+                     android:textSize="20sp"
+                     />
+    </LinearLayout>
+</LinearLayout>
+</ScrollView>
+</LinearLayout>

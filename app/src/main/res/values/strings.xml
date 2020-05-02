@@ -1,0 +1,6 @@
+<resources>
+    <string name="app_name">Covid-19Tracker</string>
+    <string name="who"><a href ="https://www.who.int/emergencies/diseases/novel-coronavirus-2019">\u2022   World Health Organisation</a></string>
+    <string name="mhfo"><a href="https://www.mohfw.gov.in/">\u2022   Ministry of Health and Family Affairs</a></string>
+    <string name="guide"><a href="https://www.mohfw.gov.in/pdf/GuidelinesforHomeIsolationofverymildpresymptomaticCOVID19cases.pdf">\u2022   Guidelines for isolation of mild symptomatic patients</a></string>
+</resources>

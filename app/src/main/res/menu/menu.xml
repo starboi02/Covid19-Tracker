@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    >
+<!--    <item android:id="@+id/about_covid"-->
+<!--        android:title="Covid-19"-->
+<!--        app:showAsAction="never"/>-->
+    <item android:id="@+id/about_dev"
+        android:title="Developer"
+        app:showAsAction="never"/>
+    <item android:id="@+id/change_theme"
+        android:title="Nm"
+        android:icon="@drawable/nightmode"
+        android:orderInCategory="100"
+        app:showAsAction="always" />
+
+</menu>
