@@ -3,9 +3,11 @@ package com.example.covid_19tracker;
 
 import android.app.ActionBar;
 import android.app.Activity;
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
+import android.util.JsonReader;
 import android.util.Log;
 
 import android.view.MenuInflater;
@@ -20,6 +22,13 @@ import androidx.appcompat.widget.Toolbar;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.StringRequest;
+import com.android.volley.toolbox.Volley;
+
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -29,15 +38,17 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
 public class MainActivity2 extends AppCompatActivity {
 
     static  int j=1;
-    private RecyclerView mRecyclerView;
+    private static final String URL_DATA="https://covid19sggts04.herokuapp.com/";
 
-    private List<Object> mRecyclerViewItems = new ArrayList<>();
-
+    private RecyclerView recyclerView;
+    private RecyclerView.Adapter adapter;
+    private List<ListItems> listItems;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -56,16 +67,13 @@ public class MainActivity2 extends AppCompatActivity {
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setDisplayShowHomeEnabled(true);
 
-        mRecyclerView = (RecyclerView) findViewById(R.id.recycler_view);
-        mRecyclerView.setHasFixedSize(true);
+        recyclerView=findViewById(R.id.recycler_view);
+        recyclerView.setHasFixedSize(true);
+        recyclerView.setLayoutManager(new LinearLayoutManager(this));
 
-        RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(this);
-        mRecyclerView.setLayoutManager(layoutManager);
+        listItems=new ArrayList<>();
 
-        RecyclerView.Adapter adapter = new RecyclerViewAdapter(this, mRecyclerViewItems);
-        mRecyclerView.setAdapter(adapter);
-
-        addMenuItemsFromJson();
+        loadRecyclerViewData();
 
 
     }
@@ -86,12 +94,7 @@ public class MainActivity2 extends AppCompatActivity {
 
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
-//        if(item.getItemId()==R.id.about_covid){
-//            Intent intent = new Intent(MainActivity2.this, MainActivity3.class);
-//
-//
-//            startActivity(intent);
-//        }
+
         if(item.getItemId()==R.id.about_dev){
             Intent intent2 = new Intent(MainActivity2.this, MainActivity4.class);
 
@@ -110,49 +113,59 @@ public class MainActivity2 extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
-    private void addMenuItemsFromJson() {
-        try {
-            String jsonDataString = readJsonDataFromFile();
-            JSONArray menuItemsJsonArray = new JSONArray(jsonDataString);
+    private void loadRecyclerViewData(){
+        final ProgressDialog progressDialog = new ProgressDialog(this);
+        progressDialog.setMessage("Loading data....");
+        progressDialog.show();
 
-            for (int i = 0; i < menuItemsJsonArray.length(); ++i) {
+        StringRequest stringRequest = new StringRequest(Request.Method.GET, URL_DATA, new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+                progressDialog.dismiss();
+                try {
+                    JSONObject jsonObject = new JSONObject(response);
+                    JSONObject stateData = jsonObject.getJSONObject("stateData");
+                    JSONObject nationData = jsonObject.getJSONObject("countryData");
+                    Iterator<String> iter = stateData.keys();
+                    while(iter.hasNext()){
+                        String key = iter.next();
+                        JSONObject stateDetails = stateData.getJSONObject(key);
 
-                JSONObject menuItemObject = menuItemsJsonArray.getJSONObject(i);
 
-                String State = menuItemObject.getString("state");
-                String Active = menuItemObject.getString("active");
-                String Deceased = menuItemObject.getString("deceased");
-                String Recovered = menuItemObject.getString("recovered");
+                        ListItems items = new ListItems(
+                                key,
+                                stateDetails.getString("cases"),
+                                stateDetails.getString("cured_discharged"),
+                                stateDetails.getString("deaths")
+                        );
+                        listItems.add(items);
+                    }
+                    String str = "Total Cases";
+                    ListItems items = new ListItems(
+                            str,
+                            nationData.getString("total"),
+                            nationData.getString("deathsTotal"),
+                            nationData.getString("cured_dischargedTotal")
+                            );
+                    listItems.add(items);
+                    adapter = new AdaptorActivity(listItems,getApplicationContext());
+                    recyclerView.setAdapter(adapter);
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
 
-                Pojo pojo = new Pojo(State, Active, Deceased,
-                        Recovered);
-                mRecyclerViewItems.add(pojo);
             }
-        } catch (IOException | JSONException exception) {
-            Log.e(MainActivity.class.getName(), "Unable to parse JSON file.", exception);
-        }
-    }
+        },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
 
-    private String readJsonDataFromFile() throws IOException {
+                    }
+                }
+        );
 
-        InputStream inputStream = null;
-        StringBuilder builder = new StringBuilder();
-
-        try {
-            String jsonDataString = null;
-            inputStream = getResources().openRawResource(R.raw.covid19);
-            BufferedReader bufferedReader = new BufferedReader(
-                    new InputStreamReader(inputStream, "UTF-8"));
-            while ((jsonDataString = bufferedReader.readLine()) != null) {
-                builder.append(jsonDataString);
-            }
-        } finally {
-            if (inputStream != null) {
-                inputStream.close();
-            }
-        }
-
-        return new String(builder);
+        RequestQueue requestQueue = Volley.newRequestQueue(this);
+        requestQueue.add(stringRequest);
     }
 
 }
