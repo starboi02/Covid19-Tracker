@@ -41,9 +41,9 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
-public class MainActivity2 extends AppCompatActivity {
+public class GlobalActivity extends AppCompatActivity {
 
-    private static final String URL_DATA="https://covid19sggts04.herokuapp.com/";
+    private static final String URL_DATA="https://coronavirus-19-api.herokuapp.com/countries";
 
     private RecyclerView recyclerView;
     private RecyclerView.Adapter adapter;
@@ -54,12 +54,12 @@ public class MainActivity2 extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         themeUtils.onActivityCreateSetTheme(this);
 
-        setContentView(R.layout.activity_main2);
+        setContentView(R.layout.activity_global);
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
 
         //setting the title
-        toolbar.setTitle("State Data");
+        toolbar.setTitle("World Data");
 
         //placing toolbar in place of actionbar
         setSupportActionBar(toolbar);
@@ -108,11 +108,6 @@ public class MainActivity2 extends AppCompatActivity {
 //        return super.onOptionsItemSelected(item);
 //    }
 
-    public void distData( View v){
-
-        Intent intent = new Intent(MainActivity2.this, DistActivity.class);
-        startActivity(intent);
-    }
 
     private void loadRecyclerViewData(){
         final ProgressDialog progressDialog = new ProgressDialog(this);
@@ -124,39 +119,25 @@ public class MainActivity2 extends AppCompatActivity {
             public void onResponse(String response) {
                 progressDialog.dismiss();
                 try {
-                    JSONObject jsonObject = new JSONObject(response);
-                    JSONObject stateData = jsonObject.getJSONObject("stateData");
-                    JSONObject nationData = jsonObject.getJSONObject("countryData");
-                    Iterator<String> iter = stateData.keys();
-                    while(iter.hasNext()){
-                        String key = iter.next();
-                        JSONObject stateDetails = stateData.getJSONObject(key);
+                    JSONArray jsonArray = new JSONArray(response);
+                    for (int i = 0; i < jsonArray.length(); i++) {
 
-
+                        JSONObject country = jsonArray.getJSONObject(i);
                         ListItems items = new ListItems(
-                                key,
-                                stateDetails.getString("cases"),
-                                stateDetails.getString("cured_discharged"),
-                                stateDetails.getString("deaths")
+                                country.getString("country"),
+                                country.getString("cases"),
+                                country.getString("recovered"),
+                                country.getString("deaths")
                         );
                         listItems.add(items);
                     }
-                    String str = "Total Cases";
-                    ListItems items = new ListItems(
-                            str,
-                            nationData.getString("total"),
-                            nationData.getString("deathsTotal"),
-                            nationData.getString("cured_dischargedTotal")
-                            );
-                    listItems.add(items);
-                    adapter = new AdaptorActivity(listItems,getApplicationContext());
+                    adapter = new AdaptorActivity(listItems, getApplicationContext());
                     recyclerView.setAdapter(adapter);
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
-
             }
-        },
+            },
                 new Response.ErrorListener() {
                     @Override
                     public void onErrorResponse(VolleyError error) {

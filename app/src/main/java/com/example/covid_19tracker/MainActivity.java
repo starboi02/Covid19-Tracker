@@ -28,7 +28,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void run() {
                 Intent i=new Intent(MainActivity.this,
-                        MainActivity2.class);
+                        WelcomeActivity.class);
                 //Intent is used to switch from one activity to another.
 
                 startActivity(i);
