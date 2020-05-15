@@ -101,13 +101,22 @@ public class GlobalActivity extends AppCompatActivity {
                     );
                     listItems.add(items);
                     JSONArray jsonArray = jsonObject.getJSONArray("Countries");
+                    String name1= "Iran, Islamic Republic of";
+                    String name2="Macedonia, Republic of";
+                    String temp;
 
                     for (int i = 0; i < jsonArray.length(); i++) {
 
                         JSONObject country = jsonArray.getJSONObject(i);
-
+                        temp=country.getString("Country");
+                        if(name1.equals(temp)){
+                            temp="Iran";
+                        }
+                        if(name2.equals(temp)){
+                            temp="Macedonia";
+                        }
                         ListItems item = new ListItems(
-                                country.getString("Country"),
+                                temp,
                                 country.getString("TotalConfirmed"),
                                 country.getString("TotalRecovered"),
                                 country.getString("TotalDeaths"),arrow+ country.getString("NewConfirmed"),

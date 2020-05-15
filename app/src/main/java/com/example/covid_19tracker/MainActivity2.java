@@ -129,11 +129,14 @@ public class MainActivity2 extends AppCompatActivity {
                 try {
                     JSONObject jsonObject = new JSONObject(response);
                     Iterator<String> iter = jsonObject.keys();
-
+                    String name="Dadra and Nagar Haveli and Daman and Diu";
                     while(iter.hasNext()){
                         String key = iter.next();
                         JSONObject stateDetails = jsonObject.getJSONObject(key);
                         String code= stateDetails.getString("statecode");
+                        if(key.equals(name)){
+                            key="Dadra and Nagar Haveli";
+                        }
                         ListItems items = new ListItems(
                                 key,
                                 cases.get(code),
