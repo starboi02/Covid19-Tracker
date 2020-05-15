@@ -13,8 +13,10 @@ import android.util.Log;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.inputmethod.EditorInfo;
 import android.widget.Button;
 import android.view.Menu;
+import android.widget.SearchView;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -43,11 +45,12 @@ import java.util.List;
 
 public class GlobalActivity extends AppCompatActivity {
 
-    private static final String URL_DATA="https://coronavirus-19-api.herokuapp.com/countries";
+    private static final String URL_DATA="https://api.covid19api.com/summary";
 
     private RecyclerView recyclerView;
     private RecyclerView.Adapter adapter;
     private List<ListItems> listItems;
+    private AdaptorActivity adaptorActivity;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -58,10 +61,7 @@ public class GlobalActivity extends AppCompatActivity {
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
 
-        //setting the title
         toolbar.setTitle("World Data");
-
-        //placing toolbar in place of actionbar
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setDisplayShowHomeEnabled(true);
@@ -76,39 +76,6 @@ public class GlobalActivity extends AppCompatActivity {
 
 
     }
-
-
-
-//    @Override
-//    public boolean onCreateOptionsMenu(Menu menu) {
-//        MenuInflater menuInflater = getMenuInflater();
-//        menuInflater.inflate(R.menu.menu, menu);
-//        return true;
-//    }
-
-
-//    @Override
-//    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
-//
-//        if(item.getItemId()==R.id.about_dev){
-//            Intent intent2 = new Intent(MainActivity2.this, MainActivity4.class);
-//
-//            startActivity(intent2);
-//        }
-//        else if( item.getItemId()== R.id.change_theme){
-//                if(j%2!=0) {
-//                    themeUtils.changeToTheme(this, themeUtils.LIGHT);
-//                    j++;
-//                }
-//                else {
-//                    themeUtils.changeToTheme(this, themeUtils.DARK);
-//                    j++;
-//                }
-//        }
-//        return super.onOptionsItemSelected(item);
-//    }
-
-
     private void loadRecyclerViewData(){
         final ProgressDialog progressDialog = new ProgressDialog(this);
         progressDialog.setMessage("Loading data....");
@@ -119,17 +86,35 @@ public class GlobalActivity extends AppCompatActivity {
             public void onResponse(String response) {
                 progressDialog.dismiss();
                 try {
-                    JSONArray jsonArray = new JSONArray(response);
+                    String arrow="\u2191";
+                    JSONObject jsonObject =new JSONObject(response);
+                    JSONObject globalData= jsonObject.getJSONObject("Global");
+                    String name ="World";
+                    ListItems items = new ListItems(
+                            name,
+                            globalData.getString("TotalConfirmed"),
+                            globalData.getString("TotalRecovered"),
+                            globalData.getString("TotalDeaths"),
+                            arrow+globalData.getString("NewConfirmed"),
+                            arrow+globalData.getString("NewRecovered"),
+                            arrow+globalData.getString("NewDeaths")
+                    );
+                    listItems.add(items);
+                    JSONArray jsonArray = jsonObject.getJSONArray("Countries");
+
                     for (int i = 0; i < jsonArray.length(); i++) {
 
                         JSONObject country = jsonArray.getJSONObject(i);
-                        ListItems items = new ListItems(
-                                country.getString("country"),
-                                country.getString("cases"),
-                                country.getString("recovered"),
-                                country.getString("deaths")
+
+                        ListItems item = new ListItems(
+                                country.getString("Country"),
+                                country.getString("TotalConfirmed"),
+                                country.getString("TotalRecovered"),
+                                country.getString("TotalDeaths"),arrow+ country.getString("NewConfirmed"),
+                                arrow+country.getString("NewRecovered"),
+                                arrow+country.getString("NewDeaths")
                         );
-                        listItems.add(items);
+                        listItems.add(item);
                     }
                     adapter = new AdaptorActivity(listItems, getApplicationContext());
                     recyclerView.setAdapter(adapter);

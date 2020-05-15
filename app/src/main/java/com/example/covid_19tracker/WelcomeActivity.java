@@ -36,7 +36,6 @@ public class WelcomeActivity extends AppCompatActivity {
 
     @Override
     public void onBackPressed() {
-        //exit app to home screen
             Intent homeScreenIntent = new Intent(Intent.ACTION_MAIN);
             homeScreenIntent.addCategory(Intent.CATEGORY_HOME);
             homeScreenIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);

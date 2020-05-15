@@ -21,10 +21,7 @@ public class MainActivity4 extends AppCompatActivity {
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
 
-        //setting the title
         toolbar.setTitle("Covid-19 Tracker");
-
-        //placing toolbar in place of actionbar
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setDisplayShowHomeEnabled(true);

@@ -68,7 +68,7 @@
             android:layout_weight=".2"
             android:gravity="center"
             android:padding="4dp"
-            android:text="Deaths"
+            android:text="Cured"
 
             android:textSize="15sp" />
         <!--            android:textColor="#f0ece2"-->
@@ -79,7 +79,7 @@
             android:layout_weight=".2"
             android:gravity="center"
             android:padding="4dp"
-            android:text="Cured"
+            android:text="Death"
             android:textSize="15sp"
 
             />

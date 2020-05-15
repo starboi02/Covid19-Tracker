@@ -6,7 +6,6 @@
     android:layout_width="match_parent"
 
     android:layout_height="match_parent">
-    <!--    android:background="#222831"-->
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/toolbar"
         android:layout_width="match_parent"
@@ -68,10 +67,9 @@
             android:layout_weight=".2"
             android:gravity="center"
             android:padding="4dp"
-            android:text="Deaths"
+            android:text="Cured"
 
             android:textSize="15sp" />
-        <!--            android:textColor="#f0ece2"-->
         <TextView
             android:layout_width="0dp"
             android:layout_height="wrap_content"
@@ -79,25 +77,10 @@
             android:layout_weight=".2"
             android:gravity="center"
             android:padding="4dp"
-            android:text="Cured"
+            android:text="Death"
             android:textSize="15sp"
 
             />
     </LinearLayout>
-
-<!--    <Button-->
-<!--        android:layout_width="match_parent"-->
-<!--        android:id="@+id/btn_about"-->
-<!--        android:layout_height="wrap_content"-->
-<!--        android:layout_marginStart="16dp"-->
-<!--        android:layout_marginEnd="16dp"-->
-<!--        android:layout_marginTop="8dp"-->
-<!--        android:layout_marginBottom="16dp"-->
-<!--        android:background="@drawable/btn_round2"-->
-<!--        android:text="District Data"-->
-<!--        android:onClick="distData"-->
-<!--        app:layout_constraintBottom_toBottomOf="parent"-->
-<!--        app:layout_constraintEnd_toEndOf="parent"-->
-<!--        app:layout_constraintStart_toStartOf="parent" />-->
 
 </androidx.constraintlayout.widget.ConstraintLayout>

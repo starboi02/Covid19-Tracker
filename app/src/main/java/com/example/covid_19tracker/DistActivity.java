@@ -2,16 +2,12 @@ package com.example.covid_19tracker;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
-
-import android.app.Activity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Spinner;
 import android.widget.TextView;
-import android.widget.Toast;
-
 import com.android.volley.DefaultRetryPolicy;
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
@@ -20,11 +16,8 @@ import com.android.volley.RetryPolicy;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
-
-import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
-
 import java.util.ArrayList;
 import java.util.Iterator;
 
@@ -51,10 +44,7 @@ public class DistActivity extends AppCompatActivity {
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
 
-        //setting the title
         toolbar.setTitle("District Data");
-
-        //placing toolbar in place of actionbar
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setDisplayShowHomeEnabled(true);
@@ -70,7 +60,7 @@ public class DistActivity extends AppCompatActivity {
 
             @Override
             public void onNothingSelected(AdapterView<?> adapterView) {
-                // DO Nothing here
+
             }
         });
 
@@ -84,7 +74,6 @@ public class DistActivity extends AppCompatActivity {
 
             @Override
             public void onNothingSelected(AdapterView<?> adapterView) {
-                // DO Nothing here
             }
         });
 
@@ -95,7 +84,6 @@ public class DistActivity extends AppCompatActivity {
         final TextView dist_active = findViewById(R.id.dist_active);
         final TextView dist_recovered =findViewById(R.id.dist_recovered);
         final TextView dist_dead = findViewById(R.id.dist_dead);
-        final String activeCases = null;
         dist_name.setText(dist);
         RequestQueue requestQueue = Volley.newRequestQueue(getApplicationContext());
         StringRequest stringRequest = new StringRequest(Request.Method.GET, URL, new Response.Listener<String>() {
@@ -110,9 +98,12 @@ public class DistActivity extends AppCompatActivity {
                             JSONObject state = jsonObject.getJSONObject(key);
                             JSONObject distList = state.getJSONObject("districtData");
                             JSONObject district = distList.getJSONObject(dist);
-                            dist_active.setText(district.getString("confirmed"));
-                            dist_recovered.setText(district.getString("recovered"));
-                            dist_dead.setText(district.getString("deceased"));
+                            JSONObject delta= district.getJSONObject("delta");
+
+                            String c="\u2191";
+                            dist_active.setText(district.getString("confirmed") +" (" + c + delta.getString("confirmed") +")");
+                            dist_recovered.setText(district.getString("recovered") +" (" + c + delta.getString("recovered") +")");
+                            dist_dead.setText(district.getString("deceased") +" (" + c + delta.getString("deceased") +")");
 
                         }
                     }

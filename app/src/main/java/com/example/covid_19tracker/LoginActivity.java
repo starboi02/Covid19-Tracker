@@ -142,7 +142,7 @@ public class LoginActivity extends AppCompatActivity {
                 .edit()
                 .putString(PREF_USERNAME,user)
                 .putString(PREF_PASSWORD,password)
-                .commit();
+                .apply();
     }
 
     public void getUser(){
@@ -150,11 +150,6 @@ public class LoginActivity extends AppCompatActivity {
         String username = pref.getString(PREF_USERNAME, null);
         String password = pref.getString(PREF_PASSWORD, null);
 
-//        if (username != null || password != null) {
-//            Intent intent = new Intent(LoginActivity.this, DataActivity.class);
-////            intent.putExtra("user",username);
-//            startActivity(intent);
-//        }
     }
 
     private void initializeUI() {

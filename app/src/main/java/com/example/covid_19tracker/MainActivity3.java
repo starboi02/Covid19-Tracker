@@ -10,10 +10,6 @@ import android.widget.TextView;
 
 public class MainActivity3 extends AppCompatActivity {
 
-//    Intent intent = getIntent();
-//    int j = intent.getIntExtra("j", 0);
-
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -22,10 +18,7 @@ public class MainActivity3 extends AppCompatActivity {
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
 
-        //setting the title
         toolbar.setTitle("Covid-19 Tracker");
-
-        //placing toolbar in place of actionbar
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setDisplayShowHomeEnabled(true);
@@ -38,13 +31,6 @@ public class MainActivity3 extends AppCompatActivity {
 
         TextView t3 = (TextView) findViewById(R.id.link3);
         t3.setMovementMethod(LinkMovementMethod.getInstance());
-
-//        if(j%2!=0) {
-//            themeUtils.changeToTheme(this, themeUtils.LIGHT);
-//        }
-//        else {
-//            themeUtils.changeToTheme(this, themeUtils.DARK);
-//        }
 
     }
 }
