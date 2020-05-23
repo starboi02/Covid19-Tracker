@@ -27,7 +27,7 @@ public class AdaptorActivity extends RecyclerView.Adapter<AdaptorActivity.ViewHo
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View v = LayoutInflater.from(parent.getContext())
-                .inflate(R.layout.single_item,parent,false);
+                .inflate(R.layout.single_item, parent, false);
         return new ViewHolder(v);
     }
 
@@ -48,7 +48,7 @@ public class AdaptorActivity extends RecyclerView.Adapter<AdaptorActivity.ViewHo
         return listItems.size();
     }
 
-    class ViewHolder extends RecyclerView.ViewHolder{
+    class ViewHolder extends RecyclerView.ViewHolder {
 
         TextView main_state;
         TextView main_active;
@@ -61,43 +61,15 @@ public class AdaptorActivity extends RecyclerView.Adapter<AdaptorActivity.ViewHo
         ViewHolder(@NonNull View itemView) {
             super(itemView);
             main_state = itemView.findViewById(R.id.main_state);
-            main_active =itemView.findViewById(R.id.main_active);
-            main_recovered =itemView.findViewById(R.id.main_recovered);
-            main_deceased =itemView.findViewById(R.id.main_deceased);
-            inc_active =itemView.findViewById(R.id.inc_active);
-            inc_recovered=itemView.findViewById(R.id.inc_recovered);
-            inc_deceased=itemView.findViewById(R.id.inc_deceased);
+            main_active = itemView.findViewById(R.id.main_active);
+            main_recovered = itemView.findViewById(R.id.main_recovered);
+            main_deceased = itemView.findViewById(R.id.main_deceased);
+            inc_active = itemView.findViewById(R.id.inc_active);
+            inc_recovered = itemView.findViewById(R.id.inc_recovered);
+            inc_deceased = itemView.findViewById(R.id.inc_deceased);
         }
     }
 
-//    public Filter getFilter() {
-//        return exampleFilter;
-//    }
-//    private Filter exampleFilter = new Filter() {
-//        @Override
-//        protected FilterResults performFiltering(CharSequence constraint) {
-//            List<ListItems> filteredList = new ArrayList<>();
-//            if (constraint == null || constraint.length() == 0) {
-//                filteredList.addAll(listItems);
-//            } else {
-//                String filterPattern = constraint.toString().toLowerCase().trim();
-//                for (ListItems item : listItems) {
-//                    if (item.getState().toLowerCase().contains(filterPattern)) {
-//                        filteredList.add(item);
-//                    }
-//                }
-//            }
-//            FilterResults results = new FilterResults();
-//            results.values = filteredList;
-//            return results;
-//        }
-//        @Override
-//        protected void publishResults(CharSequence constraint, FilterResults results) {
-//            searchList.clear();
-//            searchList.addAll((List) results.values);
-//            notifyDataSetChanged();
-//        }
-//    };
 }
 
 

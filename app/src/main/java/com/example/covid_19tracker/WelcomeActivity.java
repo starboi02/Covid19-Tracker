@@ -66,4 +66,8 @@ public class WelcomeActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
+    public void Guest(View v){
+        Intent intent =new Intent(WelcomeActivity.this,DataActivity.class);
+        startActivity(intent);
+    }
 }

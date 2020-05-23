@@ -59,7 +59,6 @@ public class DataActivity extends AppCompatActivity {
             text.setBackgroundColor(16777215);
             toast.show();
         } else {
-            //exit app to home screen
             Intent homeScreenIntent = new Intent(Intent.ACTION_MAIN);
             homeScreenIntent.addCategory(Intent.CATEGORY_HOME);
             homeScreenIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);

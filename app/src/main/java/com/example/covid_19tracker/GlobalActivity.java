@@ -7,6 +7,7 @@ import android.app.ProgressDialog;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
+import android.text.InputType;
 import android.util.JsonReader;
 import android.util.Log;
 
@@ -16,10 +17,12 @@ import android.view.View;
 import android.view.inputmethod.EditorInfo;
 import android.widget.Button;
 import android.view.Menu;
-import android.widget.SearchView;
+import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.SearchView;
 import androidx.appcompat.widget.Toolbar;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -40,8 +43,11 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Map;
+import java.util.Set;
 
 public class GlobalActivity extends AppCompatActivity {
 
@@ -49,9 +55,8 @@ public class GlobalActivity extends AppCompatActivity {
 
     private RecyclerView recyclerView;
     private RecyclerView.Adapter adapter;
-    private List<ListItems> listItems;
-    private AdaptorActivity adaptorActivity;
-
+    private List<ListItems> listItems,showList,empty;
+    private Map<String,Integer> hsh=new HashMap<>();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -71,11 +76,70 @@ public class GlobalActivity extends AppCompatActivity {
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
 
         listItems=new ArrayList<>();
+        showList=new ArrayList<>();
+        empty=new ArrayList<>();
 
         loadRecyclerViewData();
 
 
     }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater menuInflater = getMenuInflater();
+        menuInflater.inflate(R.menu.menu2, menu);
+        MenuItem searchViewItem = menu.findItem(R.id.actionSearch);
+        final androidx.appcompat.widget.SearchView searchView= (androidx.appcompat.widget.SearchView) searchViewItem.getActionView();
+        searchView.setInputType(InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_FLAG_CAP_SENTENCES);
+        searchView.setQueryHint("Country");
+        searchView.setSubmitButtonEnabled(false);
+        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String query) {
+                return false;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String newText) {
+                showList.clear();
+                if(newText.length()==0){
+                    adapter = new AdaptorActivity(listItems,getApplicationContext());
+                    recyclerView.setAdapter(adapter);
+                }
+                else {
+                    Set set = hsh.entrySet();
+                    Iterator itr = set.iterator();
+                    int flag = 1;
+                    while (itr.hasNext()) {
+                        Map.Entry entry = (Map.Entry) itr.next();
+                        String str = (String) entry.getKey();
+                        if (str.length() >= newText.length()) {
+                            if (str.substring(0, newText.length()).equals(newText)) {
+                                showList.add(listItems.get((Integer) entry.getValue()));
+                                flag = 0;
+                            }
+                        }
+                    }
+                    adapter = new AdaptorActivity(showList, getApplicationContext());
+                    recyclerView.setAdapter(adapter);
+                    if (flag == 1) {
+                        adapter = new AdaptorActivity(empty, getApplicationContext());
+                        recyclerView.setAdapter(adapter);
+                        String message ="No Country found";
+                        Toast toast= Toast.makeText(GlobalActivity.this,message, Toast.LENGTH_SHORT);
+                        View view = toast.getView();
+                        TextView text = view.findViewById(android.R.id.message);
+                        text.setBackgroundColor(16777215);
+                        toast.show();
+                    }
+                }
+                return false;
+            }
+
+        });
+        return super.onCreateOptionsMenu(menu);
+    }
+
     private void loadRecyclerViewData(){
         final ProgressDialog progressDialog = new ProgressDialog(this);
         progressDialog.setMessage("Loading data....");
@@ -100,11 +164,12 @@ public class GlobalActivity extends AppCompatActivity {
                             arrow+globalData.getString("NewDeaths")
                     );
                     listItems.add(items);
+                    hsh.put(name,0);
                     JSONArray jsonArray = jsonObject.getJSONArray("Countries");
                     String name1= "Iran, Islamic Republic of";
                     String name2="Macedonia, Republic of";
                     String temp;
-
+                    int z=1;
                     for (int i = 0; i < jsonArray.length(); i++) {
 
                         JSONObject country = jsonArray.getJSONObject(i);
@@ -124,6 +189,8 @@ public class GlobalActivity extends AppCompatActivity {
                                 arrow+country.getString("NewDeaths")
                         );
                         listItems.add(item);
+                        hsh.put(temp,z);
+                        z++;
                     }
                     adapter = new AdaptorActivity(listItems, getApplicationContext());
                     recyclerView.setAdapter(adapter);
