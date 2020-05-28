@@ -29,6 +29,7 @@
         <activity android:name=".WelcomeActivity" android:parentActivityName=".MainActivity"/>
         <activity android:name=".RegisterActivity" android:parentActivityName=".WelcomeActivity"/>
         <activity android:name=".LoginActivity" android:parentActivityName=".WelcomeActivity"/>
+        <activity android:name=".AdvisoryActivity" android:parentActivityName=".DataActivity"/>
     </application>
 
 </manifest>

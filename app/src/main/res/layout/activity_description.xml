@@ -14,9 +14,11 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="#30475e"
+        android:background="@drawable/light_round"
         android:gravity="center"
-        android:padding="10dp"
+        android:paddingLeft="10dp"
+        android:paddingRight="10dp"
+        android:paddingTop="10dp"
         android:orientation="vertical"
         android:weightSum="1"
         >
@@ -28,7 +30,7 @@
          android:paddingVertical="8dp"
          android:id="@+id/category"
          android:textColor="#000000"
-         android:background="@drawable/btn_round"
+         android:background="@drawable/round4"
          android:gravity="center"
          android:textStyle="bold"
          android:textSize="16sp"
@@ -43,7 +45,7 @@
          android:layout_height="wrap_content"
          android:id="@+id/description"
          android:justificationMode="inter_word"
-         android:background="@drawable/btn_round"
+         android:background="@drawable/round4"
          android:textSize="15sp"
          />
         <TextView
@@ -54,51 +56,57 @@
             android:padding="8dp"
             android:layout_height="wrap_content"
             android:id="@+id/nameOforg"
-            android:background="@drawable/btn_round"
+            android:background="@drawable/round4"
             android:textSize="15sp"
             />
      <LinearLayout
          android:layout_width="match_parent"
-         android:background="#30475e"
+         android:background="@drawable/light_round"
          android:layout_height="wrap_content"
          android:orientation="horizontal"
          android:weightSum="1"
          >
-      <TextView
-          android:layout_width="0dp"
-          android:layout_weight="0.2"
-          android:layout_marginTop="16dp"
-          android:textColor="#000000"
-          android:layout_height="wrap_content"
-          android:text="Ph.No:"
-          android:padding="8dp"
-          android:gravity="center"
-          android:layout_marginEnd="8dp"
-          android:background="@drawable/btn_round"
-          android:textSize="13sp"
-          />
-         <TextView
+         <LinearLayout
              android:layout_width="0dp"
-             android:layout_marginTop="16dp"
-             android:textColor="#000000"
-             android:gravity="left"
-             android:padding="8dp"
-             android:background="@drawable/btn_round"
-             android:layout_weight="0.8"
-             android:id="@+id/phoneNumber"
-             android:layout_height="wrap_content"
-             />
+             android:background="@drawable/light_round"
+             android:layout_height="match_parent"
+             android:layout_weight="0.5"
+             android:gravity="center"
+             android:orientation="horizontal"
+             >
 
-     </LinearLayout>
-        <Button
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:background="@drawable/btn_round2"
-            android:layout_marginTop="16dp"
-            android:text="Location"
-            android:id="@+id/location"
-            />
+             <ImageView
+                 android:id="@+id/location"
+                 android:layout_width="50dp"
+                 android:layout_height="50dp"
+                 android:layout_gravity="center"
+                 android:layout_marginTop="8dp"
+                 android:layout_marginEnd="16dp"
+                 android:layout_marginBottom="6dp"
+                 android:background="@drawable/web"
+                 android:scaleType="fitXY" />
+         </LinearLayout>
+         <LinearLayout
+             android:layout_width="0dp"
+             android:layout_height="match_parent"
+             android:layout_weight="0.5"
+             android:gravity="center"
+             android:background="@drawable/light_round"
+             >
+         <ImageView
+             android:layout_width="50dp"
+             android:layout_marginTop="8dp"
+             android:layout_marginBottom="6dp"
+             android:layout_gravity="center"
+             android:background="@drawable/phone_logo"
+             android:layout_marginRight="8dp"
+             android:scaleType="fitXY"
+             android:layout_marginEnd="16dp"
+             android:id="@+id/phoneNumber"
+             android:layout_height="50dp"
+             />
+         </LinearLayout>
+         </LinearLayout>
     </LinearLayout>
 
 </androidx.cardview.widget.CardView>

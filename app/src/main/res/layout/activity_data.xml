@@ -18,67 +18,124 @@
         android:layout_height="match_parent"
         android:fillViewport="true">
         <LinearLayout
-            android:orientation="vertical" android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:paddingLeft="32dp"
-            android:paddingTop="32dp"
-            android:weightSum="1"
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
             android:paddingBottom="32dp"
-            android:paddingRight="32dp"
             >
 
-            <ImageView
-                android:layout_width="232dp"
-                android:layout_height="186dp"
-                android:layout_gravity="center"
-                android:layout_marginTop="40dp"
-                android:layout_weight="0.3"
-                android:layout_marginBottom="32dp"
-                android:src="@drawable/covid19"/>
+            <com.synnapps.carouselview.CarouselView
+                android:id="@+id/carouselView"
+                android:layout_width="match_parent"
+                android:layout_height="290dp"
+                app:fillColor="#FFFFFF"
+                app:radius="3dp"
+                app:slideInterval="2000"
+                app:strokeColor="#FF777777"
+                app:strokeWidth="1dp"/>
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textSize="30sp"
-                android:layout_weight=".2"
+                android:textSize="40sp"
                 android:text="Covid-19 Tracker"
                 android:layout_marginBottom="32dp"
-                android:layout_marginTop="16dp"
+                android:layout_marginTop="32dp"
                 android:layout_gravity="center"/>
 
-            <Button
-                android:id="@+id/btn_world"
-                android:layout_weight=".2"
+            <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:background="@drawable/btn_round2"
+                android:layout_height="120dp"
+                android:weightSum="1"
+                android:paddingHorizontal="20dp"
+                android:orientation="horizontal"
                 android:layout_margin="16dp"
-                android:text="Global Stats"
+                >
+            <ImageButton
+                android:id="@+id/btn_national"
+                android:layout_width="0dp"
+                android:layout_weight="0.5"
+                android:layout_marginRight="4dp"
+                android:layout_height="match_parent"
+                android:background="@drawable/btn_round2"
+                android:src="@drawable/worlmap"
+                android:scaleType="centerInside"
+                android:text="National Stats"
                 android:onClick="Global"
                 />
-
-
-            <Button
-                android:id="@+id/btn_national"
+             <ImageButton
+                 android:layout_width="0dp"
+                 android:layout_height="match_parent"
+                 android:layout_weight="0.5"
+                 android:padding="8dp"
+                 android:layout_marginLeft="4dp"
+                 android:background="@drawable/btn_round2"
+                 android:src="@drawable/ndiamap"
+                 android:scaleType="centerInside"
+                 android:onClick="National"
+                 />
+            </LinearLayout>
+            <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_weight=".2"
-                android:background="@drawable/btn_round2"
+                android:layout_height="120dp"
+                android:weightSum="1"
+                android:paddingHorizontal="20dp"
+                android:orientation="horizontal"
                 android:layout_margin="16dp"
-                android:text="National Stats"
-                android:onClick="National"
-                />
-
-
-            <Button
-                android:id="@+id/btn_about"
+                >
+                <ImageButton
+                    android:id="@+id/btn_about"
+                    android:layout_width="0dp"
+                    android:layout_weight="0.5"
+                    android:layout_marginRight="4dp"
+                    android:layout_height="match_parent"
+                    android:background="@drawable/btn_round2"
+                    android:src="@drawable/virus"
+                    android:scaleType="centerInside"
+                    android:onClick="aboutCovid19"
+                    />
+                <ImageButton
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="0.5"
+                    android:layout_marginLeft="4dp"
+                    android:background="@drawable/btn_round2"
+                    android:src="@drawable/doc"
+                    android:paddingVertical="22dp"
+                    android:scaleType="centerInside"
+                    android:onClick="advisory"
+                    />
+            </LinearLayout>
+            <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_weight=".2"
+                android:layout_height="120dp"
+                android:weightSum="1"
+                android:paddingHorizontal="20dp"
+                android:orientation="horizontal"
                 android:layout_margin="16dp"
-                android:background="@drawable/btn_round2"
-                android:onClick="aboutCovid19"
-                android:text="About Covid-19" />
-
+                >
+                <ImageButton
+                    android:layout_width="0dp"
+                    android:layout_weight="0.5"
+                    android:layout_marginRight="4dp"
+                    android:layout_height="match_parent"
+                    android:background="@drawable/btn_round2"
+                    android:src="@drawable/helpline"
+                    android:padding="22dp"
+                    android:scaleType="centerInside"
+                    android:onClick="helpLine"
+                    />
+                <ImageButton
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="0.5"
+                    android:layout_marginLeft="4dp"
+                    android:background="@drawable/btn_round2"
+                    android:src="@drawable/data"
+                    android:paddingVertical="22dp"
+                    android:scaleType="centerInside"
+                    android:onClick="National"
+                    />
+            </LinearLayout>
 
         </LinearLayout>
     </ScrollView>

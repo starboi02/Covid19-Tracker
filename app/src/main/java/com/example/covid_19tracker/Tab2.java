@@ -85,35 +85,35 @@ public class Tab2 extends Fragment {
         // Required empty public constructor
     }
 
-//    /**
-//     * Use this factory method to create a new instance of
-//     * this fragment using the provided parameters.
-//     *
-//     * @param param1 Parameter 1.
-//     * @param param2 Parameter 2.
-//     * @return A new instance of fragment Tab2.
-//     */
-//    // TODO: Rename and change types and number of parameters
-//    public static Tab2 newInstance(String param1, String param2) {
-//        Tab2 fragment = new Tab2();
-//        Bundle args = new Bundle();
-//        args.putString(ARG_PARAM1, param1);
-//        args.putString(ARG_PARAM2, param2);
-//        fragment.setArguments(args);
-//        return fragment;
-//    }
+    /**
+     * Use this factory method to create a new instance of
+     * this fragment using the provided parameters.
+     *
+     * @param param1 Parameter 1.
+     * @param param2 Parameter 2.
+     * @return A new instance of fragment Tab2.
+     */
+    // TODO: Rename and change types and number of parameters
+    public static Tab2 newInstance(String param1, String param2) {
+        Tab2 fragment = new Tab2();
+        Bundle args = new Bundle();
+        args.putString(ARG_PARAM1, param1);
+        args.putString(ARG_PARAM2, param2);
+        fragment.setArguments(args);
+        return fragment;
+    }
 
-//    @Override
-//    public void onCreate(Bundle savedInstanceState) {
-//        super.onCreate(savedInstanceState);
-//        themeUtils.onFragmentCreateSetTheme(getActivity());
-//
-//
-////        if (getArguments() != null) {
-////            mParam1 = getArguments().getString(ARG_PARAM1);
-////            mParam2 = getArguments().getString(ARG_PARAM2);
-////        }
-//    }
+    @Override
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        themeUtils.onFragmentCreateSetTheme(getActivity());
+
+
+        if (getArguments() != null) {
+            mParam1 = getArguments().getString(ARG_PARAM1);
+            mParam2 = getArguments().getString(ARG_PARAM2);
+        }
+    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -255,14 +255,9 @@ public class Tab2 extends Fragment {
 
     private void extractData(){
 
-//        final ProgressDialog progressDialog = new ProgressDialog(getActivity());
-//        progressDialog.setMessage("Loading data....");
-//        progressDialog.show();
-
         StringRequest request = new StringRequest(Request.Method.GET, URL, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
-//                progressDialog.dismiss();
                 try {
                     JSONObject jsonObject = new JSONObject(response);
                     JSONArray jsonArray =jsonObject.getJSONArray("cases_time_series");
@@ -291,9 +286,9 @@ public class Tab2 extends Fragment {
                     BarDataSet dataset = new BarDataSet(byVals,"DailyCases");
                     dataset.setColor(Color.rgb(255, 51, 51));
                     BarDataSet dataSet1=new BarDataSet(byVals1,"DailyRecovered");
-                    dataSet1.setColor(Color.rgb(0, 231, 0));
+                    dataSet1.setColor(Color.argb(90,0, 231, 0));
                     BarDataSet dataSet2=new BarDataSet(byVals2,"DailyDeceased");
-                    dataSet2.setColor(Color.rgb(2, 2, 255));
+                    dataSet2.setColor(Color.argb(80,50,50,225));
 
 
                     // create a dataset and give it a type
@@ -415,103 +410,6 @@ public class Tab2 extends Fragment {
 
     }
 
-//    // TODO: Rename method, update argument and hook method into UI event
-//    public void onButtonPressed(Uri uri) {
-//        if (mListener != null) {
-//            mListener.onFragmentInteraction(uri);
-//        }
-//    }
-//
-//    @Override
-//    public void onAttach(Context context) {
-//        super.onAttach(context);
-//        if (context instanceof OnFragmentInteractionListener) {
-//            mListener = (OnFragmentInteractionListener) context;
-//        } else {
-//            throw new RuntimeException(context.toString()
-//                    + " must implement OnFragmentInteractionListener");
-//        }
-//    }
-
-//    @Override
-//    public void onDetach() {
-//        super.onDetach();
-//        mListener = null;
-//    }
-
-//    @Override
-//    public void onChartGestureStart(MotionEvent me, ChartTouchListener.ChartGesture lastPerformedGesture) {
-//        Log.i("Gesture", "START, x: " + me.getX() + ", y: " + me.getY());
-//    }
-//
-//    @Override
-//    public void onChartGestureEnd(MotionEvent me, ChartTouchListener.ChartGesture lastPerformedGesture) {
-//        Log.i("Gesture", "END, lastGesture: " + lastPerformedGesture);
-//
-//        // un-highlight values after the gesture is finished and no single-tap
-////        if(lastPerformedGesture != ChartTouchListener.ChartGesture.SINGLE_TAP)
-////            // or highlightTouch(null) for callback to onNothingSelected(...)
-////            mChart.highlightValues(null);
-//    }
-//
-//    @Override
-//    public void onChartLongPressed(MotionEvent me) {
-//        Log.i("LongPress", "Chart longpressed.");
-//    }
-//
-//    @Override
-//    public void onChartDoubleTapped(MotionEvent me) {
-//        Log.i("DoubleTap", "Chart double-tapped.");
-//    }
-//
-//    @Override
-//    public void onChartSingleTapped(MotionEvent me) {
-//        Log.i("SingleTap", "Chart single-tapped.");
-//    }
-//
-//    @Override
-//    public void onChartFling(MotionEvent me1, MotionEvent me2, float velocityX, float velocityY) {
-//        Log.i("Fling", "Chart flinged. VeloX: "
-//                + velocityX + ", VeloY: " + velocityY);
-//    }
-//
-//    @Override
-//    public void onChartScale(MotionEvent me, float scaleX, float scaleY) {
-//        Log.i("Scale / Zoom", "ScaleX: " + scaleX + ", ScaleY: " + scaleY);
-//    }
-//
-//    @Override
-//    public void onChartTranslate(MotionEvent me, float dX, float dY) {
-//        Log.i("Translate / Move", "dX: " + dX + ", dY: " + dY);
-//    }
-//
-//    @Override
-//    public void onValueSelected(Entry e, Highlight h) {
-//        Log.i("Entry selected", e.toString());
-//        Log.i("LOWHIGH", "low: " + mChart.getLowestVisibleX()
-//                + ", high: " + mChart.getHighestVisibleX());
-//
-//        Log.i("MIN MAX", "xmin: " + mChart.getXChartMin()
-//                + ", xmax: " + mChart.getXChartMax()
-//                + ", ymin: " + mChart.getYChartMin()
-//                + ", ymax: " + mChart.getYChartMax());
-//    }
-//
-//    @Override
-//    public void onNothingSelected() {
-//
-//    }
-
-//    /**
-//     * This interface must be implemented by activities that contain this
-//     * fragment to allow an interaction in this fragment to be communicated
-//     * to the activity and potentially other fragments contained in that
-//     * activity.
-//     * <p>
-//     * See the Android Training lesson <a href=
-//     * "http://developer.android.com/training/basics/fragments/communicating.html"
-//     * >Communicating with Other Fragments</a> for more information.
-//     */
     public interface OnFragmentInteractionListener {
         // TODO: Update argument type and name
         void onFragmentInteraction(Uri uri);

@@ -7,18 +7,24 @@ import androidx.appcompat.widget.Toolbar;
 import android.app.Activity;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.net.Uri;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.firebase.auth.FirebaseAuth;
+import com.synnapps.carouselview.CarouselView;
+import com.synnapps.carouselview.ImageListener;
 
 public class DataActivity extends AppCompatActivity {
 
+    CarouselView carouselView;
+    int[] sampleImages = {R.drawable.covid8,R.drawable.covid6,R.drawable.covid4,R.drawable.covid10,R.drawable.covid11};
     static  int j=1;
     private int k=0;
     FirebaseAuth firebaseAuth;
@@ -36,7 +42,18 @@ public class DataActivity extends AppCompatActivity {
         toolbar.setTitle("Covid-19 Tracker");
         setSupportActionBar(toolbar);
 
+        carouselView = findViewById(R.id.carouselView);
+        carouselView.setPageCount(sampleImages.length);
+        carouselView.setImageListener(imageListener);
+
     }
+
+    ImageListener imageListener = new ImageListener() {
+        @Override
+        public void setImageForPosition(int position, ImageView imageView) {
+            imageView.setImageResource(sampleImages[position]);
+        }
+    };
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -110,6 +127,16 @@ public class DataActivity extends AppCompatActivity {
     }
     public void Global( View v){
         Intent intent = new Intent(DataActivity.this, GlobalActivity.class);
+        startActivity(intent);
+    }
+    public void helpLine( View v){
+
+        Uri uri = Uri.parse("tel:" + "01123978046"); // missing 'http://' will cause crashed
+        Intent intent = new Intent(Intent.ACTION_DIAL, uri);
+        startActivity(intent);
+    }
+    public void advisory(View v){
+        Intent intent = new Intent(DataActivity.this, AdvisoryActivity.class);
         startActivity(intent);
     }
 }

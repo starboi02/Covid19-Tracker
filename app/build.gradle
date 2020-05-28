@@ -41,4 +41,5 @@ dependencies {
     implementation 'com.google.firebase:firebase-database:19.3.0'
 
     implementation 'com.github.PhilJay:MPAndroidChart:v3.0.3'
+    implementation 'com.synnapps:carouselview:0.1.4'
 }

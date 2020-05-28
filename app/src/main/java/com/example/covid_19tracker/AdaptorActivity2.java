@@ -3,13 +3,17 @@ package com.example.covid_19tracker;
 import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
+import android.text.method.LinkMovementMethod;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.Filter;
+import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
+
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -20,14 +24,7 @@ public class AdaptorActivity2 extends RecyclerView.Adapter<AdaptorActivity2.View
 
     private List<CatItems> CatItems;
     private Context context;
-    private AdapterView.OnItemClickListener mlistner;
 
-    public interface OnItemClickListner{
-        void goToLink(String link);
-    }
-    public void setOnItemClickListner(AdapterView.OnItemClickListener listner){
-        mlistner=listner;
-    }
     AdaptorActivity2(List<CatItems> CatItems, Context context) {
         this.CatItems = CatItems;
         this.context = context;
@@ -43,14 +40,26 @@ public class AdaptorActivity2 extends RecyclerView.Adapter<AdaptorActivity2.View
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-        CatItems CatItem = CatItems.get(position);
+        final CatItems CatItem = CatItems.get(position);
         holder.category.setText(CatItem.getCategory());
         holder.nameoforg.setText(CatItem.getname());
         holder.description.setText(CatItem.getDescription());
-        holder.phoneNumber.setText(CatItem.getPhoneNumber());
+        holder.phoneNumber.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String phone= CatItem.getPhoneNumber();
+                Uri uri = Uri.parse("tel:" + phone.substring(0,10));
+                Intent intent = new Intent(Intent.ACTION_DIAL, uri);
+                v.getContext().startActivity(intent);
+            }
+        });
         holder.contact.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                String url = CatItem.getLink();
+                Intent intent = new Intent(Intent.ACTION_VIEW);
+                intent.setData(Uri.parse(url));
+                v.getContext().startActivity(intent);
             }
         });
     }
@@ -62,8 +71,8 @@ public class AdaptorActivity2 extends RecyclerView.Adapter<AdaptorActivity2.View
 
     class ViewHolder extends RecyclerView.ViewHolder {
 
-        TextView category,phoneNumber,nameoforg,description;
-        Button contact;
+        TextView category,nameoforg,description;
+        ImageView contact,phoneNumber;
 
         ViewHolder(@NonNull View itemView) {
             super(itemView);

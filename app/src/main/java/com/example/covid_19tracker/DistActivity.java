@@ -114,7 +114,18 @@ public class DistActivity extends AppCompatActivity {
                     catItems.clear();
                     for(int i=0;i<jsonArray.length();i++){
                         JSONObject resource=jsonArray.getJSONObject(i);
-                        if(resource.getString("city").equals(dist) || resource.getString("city").equals(state)){
+                        if(resource.getString("city").equals("Gurgaon") && dist.equals("Gurugram")){
+                            String phoneNumber=resource.getString("phonenumber");
+                            CatItems items =new CatItems(
+                                    resource.getString("category"),
+                                    resource.getString("nameoftheorganisation"),
+                                    resource.getString("descriptionandorserviceprovided"),
+                                    phoneNumber,
+                                    resource.getString("contact")
+                            );
+                            catItems.add(items);
+                        }
+                        else if(resource.getString("city").equals(dist) || resource.getString("city").equals(state)){
                             String phoneNumber=resource.getString("phonenumber");
                             CatItems items =new CatItems(
                                     resource.getString("category"),
@@ -162,7 +173,7 @@ public class DistActivity extends AppCompatActivity {
                     for (int i=0;i<jsonArray.length();i++){
                         JSONObject district = jsonArray.getJSONObject(i);
                         if(district.getString("district").equals(dist)){
-                            String temp = dist + " is a " + district.getString("zone") + " Zone";
+                            String temp = dist + " lies in " + district.getString("zone") + " Zone";
                             dist_name.setText(temp);
                             dist_name.setTextColor(Color.WHITE);
                             if(district.getString("zone").equals("Green"))
