@@ -1,14 +1,36 @@
 package com.example.covid_19tracker;
 
+import android.app.ProgressDialog;
 import android.content.Context;
+import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.StringRequest;
+import com.android.volley.toolbox.Volley;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Iterator;
+import java.util.List;
+import java.util.Map;
 
 
 /**
@@ -28,6 +50,24 @@ public class Tab1 extends Fragment {
     // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
+
+    private static final String URL_DATA="https://api.covid19india.org/state_district_wise.json";
+    private static final String URL_INC="https://api.covid19india.org/data.json";
+
+    private RecyclerView recyclerView;
+    private RecyclerView.Adapter adapter;
+    private List<ListItems> listItems,show,empty;
+    private Map<String,String> incCases= new HashMap<>();
+    private Map<String,String> incRecovered= new HashMap<>();
+    private Map<String,String> incDeceased= new HashMap<>();
+    private Map<String,String> cases=new HashMap<>();
+    private Map<String,String> recovered =new HashMap<>();
+    private Map<String,String> deceased =new HashMap<>();
+    private Map<String,Integer> hsh = new HashMap<>();
+    private String natCases,natRecovered,natDeceased,total,totalRec,totalDec;
+    private String arrow="\u2191";
+
+
 
     private OnFragmentInteractionListener mListener;
 
@@ -56,6 +96,7 @@ public class Tab1 extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        themeUtils.onActivityCreateSetTheme(getActivity());
         if (getArguments() != null) {
             mParam1 = getArguments().getString(ARG_PARAM1);
             mParam2 = getArguments().getString(ARG_PARAM2);
@@ -66,7 +107,138 @@ public class Tab1 extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_tab1, container, false);
+        View view=inflater.inflate(R.layout.fragment_tab1, container, false);
+        Button btn=view.findViewById(R.id.btn_about);
+        btn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                distData();
+            }
+        });
+
+        recyclerView=view.findViewById(R.id.recycler_view);
+        recyclerView.setHasFixedSize(true);
+        recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
+
+
+        listItems=new ArrayList<>();
+        show=new ArrayList<>();
+        empty=new ArrayList<>();
+
+        loadRecyclerViewData();
+
+        return view;
+
+
+    }
+
+    public void distData(){
+
+        Intent intent = new Intent(getActivity(), DistActivity.class);
+        startActivity(intent);
+    }
+
+    private void loadRecyclerViewData(){
+        final ProgressDialog progressDialog = new ProgressDialog(getActivity());
+        progressDialog.setMessage("Loading data....");
+        progressDialog.show();
+
+        StringRequest request = new StringRequest(Request.Method.GET, URL_INC, new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+                progressDialog.dismiss();
+                try {
+                    JSONObject jsonObject = new JSONObject(response);
+                    JSONArray jsonArray = jsonObject.getJSONArray("cases_time_series");
+                    int current =jsonArray.length()-1;
+                    JSONObject increment =jsonArray.getJSONObject(current);
+                    natCases=increment.getString("dailyconfirmed");
+                    natRecovered=increment.getString("dailyrecovered");
+                    natDeceased=increment.getString("dailydeceased");
+                    total=increment.getString("totalconfirmed");
+                    totalRec=increment.getString("totalrecovered");
+                    totalDec=increment.getString("totaldeceased");
+
+                    JSONArray jsonArray1=jsonObject.getJSONArray("statewise");
+                    for(int i=0;i<jsonArray1.length();i++){
+                        JSONObject temp=jsonArray1.getJSONObject(i);
+                        incCases.put(temp.getString("statecode"),temp.getString("deltaconfirmed"));
+                        incRecovered.put(temp.getString("statecode"),temp.getString("deltarecovered"));
+                        incDeceased.put(temp.getString("statecode"),temp.getString("deltadeaths"));
+                        cases.put(temp.getString("statecode"),temp.getString("confirmed"));
+                        recovered.put(temp.getString("statecode"),temp.getString("recovered"));
+                        deceased.put(temp.getString("statecode"),temp.getString("deaths"));
+                    }
+
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+
+            }
+        },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+
+                    }
+                }
+        );
+
+        RequestQueue requestQ = Volley.newRequestQueue(getActivity());
+        requestQ.add(request);
+
+
+        StringRequest stringRequest = new StringRequest(Request.Method.GET, URL_DATA, new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+                progressDialog.dismiss();
+                try {
+                    JSONObject jsonObject = new JSONObject(response);
+                    Iterator<String> iter = jsonObject.keys();
+                    String name="Dadra and Nagar Haveli and Daman and Diu";
+                    int z=1;
+                    String str = "Total Cases";
+                    ListItems item = new ListItems(
+                            str,
+                            total,
+                            totalRec,totalDec,arrow+natCases,arrow+natRecovered,arrow+natDeceased
+                    );
+                    listItems.add(item);
+                    while(iter.hasNext()){
+                        String key = iter.next();
+                        JSONObject stateDetails = jsonObject.getJSONObject(key);
+                        String code= stateDetails.getString("statecode");
+                        if(key.equals(name)){
+                            key="Dadra and Nagar Haveli";
+                        }
+                        ListItems items = new ListItems(
+                                key,
+                                cases.get(code),
+                                recovered.get(code),
+                                deceased.get(code),arrow+incCases.get(code),arrow+incRecovered.get(code),arrow+incDeceased.get(code)
+                        );
+                        hsh.put(key,z);
+                        listItems.add(items);
+                        z++;
+                    }
+                    adapter = new AdaptorActivity(listItems,getContext());
+                    recyclerView.setAdapter(adapter);
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+
+            }
+        },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+
+                    }
+                }
+        );
+
+        RequestQueue requestQueue = Volley.newRequestQueue(getActivity());
+        requestQueue.add(stringRequest);
     }
 
     // TODO: Rename method, update argument and hook method into UI event

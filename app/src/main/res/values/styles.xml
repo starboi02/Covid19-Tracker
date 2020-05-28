@@ -18,6 +18,12 @@
         <item name="android:textColor">#000000</item>
         <item name="android:background">#ec625f</item>
     </style>
+    <style name="TabTheme" parent="Theme.AppCompat.Light.NoActionBar">
+        <!-- Customize your theme here. -->
+        <item name="android:textColor">#f0ece2</item>
+        <item name="android:background">#f0ece2</item>
+        <item name="colorAccent">#e14594</item>
+    </style>
 
 
 </resources>

@@ -4,7 +4,6 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:weightSum="1"
     xmlns:app="http://schemas.android.com/apk/res-auto">
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/toolbar"
@@ -20,16 +19,18 @@
         android:fillViewport="true">
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/showLayout"
         android:orientation="vertical">
     <Spinner
         android:id="@+id/spinner"
-        android:layout_weight=".05"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
         android:layout_marginTop="32dp"
-        android:layout_marginEnd="16dp"
+        android:layout_marginLeft="16dp"
+        android:layout_marginRight="16dp"
+        android:layout_marginBottom="16dp"
+        android:layout_gravity="center_vertical"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/toolbar" />
@@ -38,135 +39,149 @@
         android:id="@+id/spinner_district"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_weight=".05"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="42dp"
-        android:layout_marginEnd="16dp"
+        android:layout_margin="16dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/spinner" />
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_weight="0.9"
-        android:weightSum=".9"
-        android:background="@color/color2"
-        android:layout_margin="32dp"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        >
-     <TextView
-         android:layout_width="match_parent"
-         android:layout_height="wrap_content"
-         android:id="@+id/dist_name"
-         android:text="District"
-         android:paddingVertical="8dp"
-         android:background="@color/color"
-         android:textColor="#000000"
-         android:layout_marginBottom="16dp"
-         android:textSize="30sp"
-         android:gravity="center"/>
-      <LinearLayout
-          android:layout_weight=".3"
-          android:layout_margin="16dp"
-          android:layout_width="match_parent"
-          android:layout_height="wrap_content"
-          android:background="@color/color2"
-          android:orientation="horizontal"
-          android:weightSum="1"
-          >
-        <TextView
-            android:layout_width="0dp"
-            android:layout_weight=".5"
-            android:background="@color/color"
-            android:textColor="#000000"
-            android:layout_marginRight="8dp"
-            android:gravity="center"
-            android:layout_height="match_parent"
-            android:text="Total"
-            android:textSize="30dp"
-            />
-        <TextView
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:text="........."
-            android:background="@color/color"
-            android:textColor="#000000"
-            android:layout_marginLeft="8dp"
-            android:gravity="center"
-            android:textSize="30dp"
-            android:id="@+id/dist_active"
-            android:layout_weight=".5"
-            />
-    </LinearLayout>
         <LinearLayout
-            android:layout_margin="16dp"
-            android:layout_weight="0.3"
-            android:background="@color/color2"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:weightSum="1"
+            android:orientation="vertical"
             >
             <TextView
-                android:layout_width="0dp"
-                android:layout_weight=".5"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="16dp"
+                android:textSize="20sp"
+                android:layout_margin="16dp"
+                android:id="@+id/district_info"
+                android:text=""
                 android:gravity="center"
-                android:background="@color/color"
-                android:textColor="#000000"
-                android:layout_marginRight="8dp"
-                android:layout_height="match_parent"
-                android:text="Cured"
-                android:textSize="30dp"
                 />
-            <TextView
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:text="........."
-                android:background="@color/color"
-                android:textColor="#000000"
-                android:layout_marginLeft="8dp"
-                android:gravity="center"
-                android:textSize="30dp"
-                android:id="@+id/dist_recovered"
-                android:layout_weight=".5"
-                />
-        </LinearLayout>
         <LinearLayout
-            android:layout_weight="0.3"
-            android:layout_marginBottom="32dp"
+            android:layout_marginTop="8dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/round"
+            android:padding="10dp"
             android:layout_marginHorizontal="16dp"
-            android:layout_marginTop="16dp"
-            android:layout_width="match_parent"
-            android:background="@color/color2"
-            android:layout_height="wrap_content"
             android:orientation="horizontal"
-            android:weightSum="1"
+            android:weightSum=".6"
             >
-            <TextView
+            <LinearLayout
                 android:layout_width="0dp"
-                android:layout_weight=".5"
-                android:gravity="center"
-                android:background="@color/color"
-                android:textColor="#000000"
-                android:layout_marginRight="8dp"
-                android:layout_height="match_parent"
-                android:text="Deaths"
-                android:textSize="30dp"
-                />
-            <TextView
+                android:layout_weight=".2"
+                android:background="#30475e"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+                <TextView
+                    android:id="@+id/main_active"
+                    android:layout_width="match_parent"
+                    android:layout_height="20dp"
+                    android:layout_margin="5dp"
+                    android:background="@drawable/btn_round"
+                    android:gravity="center"
+                    android:text="Total"
+                    android:textColor="#000000"
+                    android:textSize="15sp"
+                    />
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="40dp"
+                    android:layout_margin="5dp"
+                    android:background="@drawable/btn_round"
+                    android:gravity="center"
+                    android:text="..."
+                    android:id="@+id/inc_active"
+                    android:textColor="#FF0000"
+                    android:textSize="15sp"/>
+
+            </LinearLayout>
+            <LinearLayout
                 android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:textSize="30dp"
-                android:text="........."
-                android:background="@color/color"
-                android:textColor="#000000"
-                android:layout_marginLeft="8dp"
-                android:gravity="center"
-                android:id="@+id/dist_dead"
-                android:layout_weight=".5"
+                android:layout_weight=".2"
+                android:background="#30475e"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+                <TextView
+                    android:id="@+id/main_recovered"
+                    android:layout_width="match_parent"
+                    android:layout_height="20dp"
+                    android:layout_margin="5dp"
+                    android:background="@drawable/btn_round"
+                    android:gravity="center"
+                    android:text="Cured"
+                    android:textColor="#000000"
+                    android:textSize="15sp"
+                    />
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="40dp"
+                    android:layout_margin="5dp"
+                    android:background="@drawable/btn_round"
+                    android:gravity="center"
+                    android:text="..."
+                    android:id="@+id/inc_recovered"
+                    android:textColor="#008000"
+                    android:textSize="15sp"/>
+
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_weight=".2"
+                android:background="#30475e"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+                <TextView
+                    android:id="@+id/main_deceased"
+                    android:layout_width="match_parent"
+                    android:layout_height="20dp"
+                    android:layout_margin="5dp"
+                    android:background="@drawable/btn_round"
+                    android:gravity="center"
+                    android:text="Death"
+                    android:textColor="#000000"
+                    android:textSize="15sp"
+                    />
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="40dp"
+                    android:layout_margin="5dp"
+                    android:background="@drawable/btn_round"
+                    android:gravity="center"
+                    android:text="..."
+                    android:id="@+id/inc_deceased"
+                    android:textColor="#FF4500"
+                    android:textSize="15sp"/>
+
+            </LinearLayout>
+        </LinearLayout>
+            <TextView
+                android:layout_width="250dp"
+                android:layout_height="wrap_content"
+                android:paddingVertical="16dp"
+                android:paddingLeft="29dp"
+                android:text="Facilities Available:"
+                android:gravity="left"
+                android:textColor="@color/white"
+                android:layout_marginTop="16dp"
+                android:layout_marginBottom="16dp"
+                android:textSize="20sp"
+                android:background="@drawable/round3"
                 />
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/recycler_view"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginHorizontal="16dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginBottom="60dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
         </LinearLayout>
     </LinearLayout>
-    </LinearLayout>
+
     </ScrollView>
+
 </LinearLayout>

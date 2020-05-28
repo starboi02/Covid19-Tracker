@@ -2,10 +2,18 @@ package com.example.covid_19tracker;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+
+import android.app.LauncherActivity;
+import android.app.ProgressDialog;
+import android.graphics.Color;
 import android.os.Bundle;
+import android.text.Layout;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.LinearLayout;
 import android.widget.Spinner;
 import android.widget.TextView;
 import com.android.volley.DefaultRetryPolicy;
@@ -16,18 +24,26 @@ import com.android.volley.RetryPolicy;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
+
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 import java.util.ArrayList;
 import java.util.Iterator;
+import java.util.List;
 
 public class DistActivity extends AppCompatActivity {
 
     Spinner spinner;
     Spinner spinner_district;
     public static String URL = "https://api.covid19india.org/state_district_wise.json";
+    public static String URL_zon="https://api.covid19india.org/zones.json";
+    public static String URL_res="https://api.covid19india.org/resources/resources.json";
     ArrayList<String> StateName;
     ArrayList<String> DistName;
+    private RecyclerView recyclerView;
+    private RecyclerView.Adapter adapter;
+    private List<CatItems> catItems;
 
 
     @Override
@@ -39,7 +55,6 @@ public class DistActivity extends AppCompatActivity {
         DistName = new ArrayList<>();
         spinner = (Spinner) findViewById(R.id.spinner);
         spinner_district = findViewById(R.id.spinner_district);
-
         loadSpinnerData(URL);
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
@@ -70,21 +85,111 @@ public class DistActivity extends AppCompatActivity {
                 String dist = spinner_district.getItemAtPosition(spinner_district.getSelectedItemPosition()).toString();
                 String state = spinner.getSelectedItem().toString();
                 setData(dist,state);
+
             }
 
             @Override
             public void onNothingSelected(AdapterView<?> adapterView) {
             }
         });
+        recyclerView=findViewById(R.id.recycler_view);
+        recyclerView.setHasFixedSize(true);
+        recyclerView.setLayoutManager(new LinearLayoutManager(this));
 
+        catItems=new ArrayList<>();
     }
 
+    private void loadRecyclerViewData(final String dist, final String state){
+        final ProgressDialog progressDialog = new ProgressDialog(this);
+        progressDialog.setMessage("Loading data....");
+        progressDialog.show();
+
+        StringRequest stringRequest = new StringRequest(Request.Method.GET, URL_res, new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+                progressDialog.dismiss();
+                try{
+                    JSONObject jsonObject =new JSONObject(response);
+                    JSONArray jsonArray = jsonObject.getJSONArray("resources");
+                    catItems.clear();
+                    for(int i=0;i<jsonArray.length();i++){
+                        JSONObject resource=jsonArray.getJSONObject(i);
+                        if(resource.getString("city").equals(dist) || resource.getString("city").equals(state)){
+                            String phoneNumber=resource.getString("phonenumber");
+                            CatItems items =new CatItems(
+                                    resource.getString("category"),
+                                    resource.getString("nameoftheorganisation"),
+                                    resource.getString("descriptionandorserviceprovided"),
+                                    phoneNumber,
+                                    resource.getString("contact")
+                            );
+                            catItems.add(items);
+                        }
+                    }
+                    adapter = new AdaptorActivity2(catItems, getApplicationContext());
+                    recyclerView.setAdapter(adapter);
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+            }
+        },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+
+                    }
+                }
+        );
+
+        RequestQueue requestQueue = Volley.newRequestQueue(this);
+        requestQueue.add(stringRequest);
+    }
+
+
     public void setData(final String dist, final String state){
-        TextView dist_name = findViewById(R.id.dist_name);
-        final TextView dist_active = findViewById(R.id.dist_active);
-        final TextView dist_recovered =findViewById(R.id.dist_recovered);
-        final TextView dist_dead = findViewById(R.id.dist_dead);
-        dist_name.setText(dist);
+        final TextView dist_name = findViewById(R.id.district_info);
+        final TextView dist_active = findViewById(R.id.inc_active);
+        final TextView dist_recovered =findViewById(R.id.inc_recovered);
+        final TextView dist_dead = findViewById(R.id.inc_deceased);
+
+        RequestQueue requestQ=Volley.newRequestQueue(getApplicationContext());
+        StringRequest stringReq = new StringRequest(Request.Method.GET, URL_zon, new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+                try {
+                    JSONObject jsonObject= new JSONObject(response);
+                    JSONArray jsonArray =jsonObject.getJSONArray("zones");
+                    for (int i=0;i<jsonArray.length();i++){
+                        JSONObject district = jsonArray.getJSONObject(i);
+                        if(district.getString("district").equals(dist)){
+                            String temp = dist + " is a " + district.getString("zone") + " Zone";
+                            dist_name.setText(temp);
+                            dist_name.setTextColor(Color.WHITE);
+                            if(district.getString("zone").equals("Green"))
+                                dist_name.setBackgroundResource(R.drawable.green);
+                            else if(district.getString("zone").equals("Red"))
+                                dist_name.setBackgroundResource(R.drawable.red);
+                            else
+                                dist_name.setBackgroundResource(R.drawable.orange);
+                        }
+
+                    }
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+            }
+        },new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                error.printStackTrace();
+            }
+        }
+                );
+        int socketTimeout1 = 30000;
+        RetryPolicy policy1 = new DefaultRetryPolicy(socketTimeout1, DefaultRetryPolicy.DEFAULT_MAX_RETRIES, DefaultRetryPolicy.DEFAULT_BACKOFF_MULT);
+        stringReq.setRetryPolicy(policy1);
+        requestQ.add(stringReq);
+
         RequestQueue requestQueue = Volley.newRequestQueue(getApplicationContext());
         StringRequest stringRequest = new StringRequest(Request.Method.GET, URL, new Response.Listener<String>() {
             @Override
@@ -123,6 +228,7 @@ public class DistActivity extends AppCompatActivity {
         RetryPolicy policy = new DefaultRetryPolicy(socketTimeout, DefaultRetryPolicy.DEFAULT_MAX_RETRIES, DefaultRetryPolicy.DEFAULT_BACKOFF_MULT);
         stringRequest.setRetryPolicy(policy);
         requestQueue.add(stringRequest);
+        loadRecyclerViewData(dist,state);
     }
 
     private void loadSpinnerData(String url) {
