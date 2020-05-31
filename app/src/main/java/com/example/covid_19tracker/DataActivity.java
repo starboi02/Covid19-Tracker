@@ -50,6 +50,7 @@ public class DataActivity extends AppCompatActivity {
         @Override
         public void setImageForPosition(int position, ImageView imageView) {
             imageView.setImageResource(sampleImages[position]);
+            imageView.setScaleType(ImageView.ScaleType.FIT_XY);
         }
     };
 

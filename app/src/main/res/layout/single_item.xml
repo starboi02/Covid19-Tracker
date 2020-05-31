@@ -65,7 +65,7 @@
             android:gravity="center"
             android:text="Total"
             android:textColor="#FFFE0739"
-            android:textSize="20sp"
+            android:textSize="18sp"
              />
         <TextView
             android:layout_width="match_parent"
@@ -94,7 +94,7 @@
                     android:gravity="center"
                     android:text="Active"
                     android:textColor="#FF1f5ccf"
-                    android:textSize="20sp"
+                    android:textSize="18sp"
                     />
                 <TextView
                     android:layout_width="match_parent"
@@ -124,7 +124,7 @@
                     android:gravity="center"
                     android:text="Cured"
                     android:textColor="#16c952"
-                    android:textSize="20sp"
+                    android:textSize="18sp"
                     />
                 <TextView
                     android:layout_width="match_parent"
@@ -153,7 +153,7 @@
                     android:gravity="center"
                     android:text="Death"
                     android:textColor="#f27507"
-                    android:textSize="20sp"
+                    android:textSize="18sp"
                     />
                 <TextView
                     android:layout_width="match_parent"
