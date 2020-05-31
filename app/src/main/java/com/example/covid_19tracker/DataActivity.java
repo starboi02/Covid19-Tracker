@@ -3,10 +3,7 @@ package com.example.covid_19tracker;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
-
-import android.app.Activity;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.net.Uri;
 import android.os.Bundle;
 import android.view.Menu;
@@ -14,6 +11,7 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -24,11 +22,10 @@ import com.synnapps.carouselview.ImageListener;
 public class DataActivity extends AppCompatActivity {
 
     CarouselView carouselView;
-    int[] sampleImages = {R.drawable.covid8,R.drawable.covid6,R.drawable.covid4,R.drawable.covid10,R.drawable.covid11};
+    LinearLayout linearLayout ;
+    int[] sampleImages = {R.drawable.covid6,R.drawable.covid17,R.drawable.covid10,R.drawable.covid16,R.drawable.covid11};
     static  int j=1;
     private int k=0;
-    FirebaseAuth firebaseAuth;
-    private FirebaseAuth.AuthStateListener  authStateListener;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,12 +33,13 @@ public class DataActivity extends AppCompatActivity {
         themeUtils.onActivityCreateSetTheme(this);
         setContentView(R.layout.activity_data);
 
-        firebaseAuth = FirebaseAuth.getInstance();
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         toolbar.setTitle("Covid-19 Tracker");
         setSupportActionBar(toolbar);
 
+//        linearLayout=findViewById(R.id.linearLayout);
+//        linearLayout.setBackgroundResource(R.color.background);
         carouselView = findViewById(R.id.carouselView);
         carouselView.setPageCount(sampleImages.length);
         carouselView.setImageListener(imageListener);
@@ -90,39 +88,33 @@ public class DataActivity extends AppCompatActivity {
 
         if(item.getItemId()==R.id.about_dev){
             Intent intent2 = new Intent(DataActivity.this, MainActivity4.class);
-
             startActivity(intent2);
         }
         else if( item.getItemId()== R.id.change_theme){
             if(j%2!=0) {
                 themeUtils.changeToTheme(this, themeUtils.LIGHT);
+//                linearLayout.setBackgroundResource(R.color.light);
                 j++;
             }
             else {
                 themeUtils.changeToTheme(this, themeUtils.DARK);
+//                linearLayout.setBackgroundResource(R.color.background);
                 j++;
             }
         }
-        else if(item.getItemId()==R.id.logout){
-            SharedPreferences sharedPrefs =getSharedPreferences(LoginActivity.PREFS_NAME,MODE_PRIVATE);
-            SharedPreferences.Editor editor = sharedPrefs.edit();
-            editor.clear();
-            editor.apply();
-            startActivity(new Intent(getApplicationContext(),WelcomeActivity.class));
-            finish();
 
-        }
         return super.onOptionsItemSelected(item);
     }
     public void aboutCovid19( View v){
 
         Intent intent = new Intent(DataActivity.this, MainActivity3.class);
+        intent.putExtra("ThemeValue", j);
         startActivity(intent);
     }
     public void National( View v){
 
         Intent intent = new Intent(DataActivity.this, MainActivity2.class);
-        intent.putExtra("ThemeValue", j);
+//        intent.putExtra("ThemeValue", j);
         startActivity(intent);
     }
     public void Global( View v){
@@ -137,6 +129,10 @@ public class DataActivity extends AppCompatActivity {
     }
     public void advisory(View v){
         Intent intent = new Intent(DataActivity.this, AdvisoryActivity.class);
+        startActivity(intent);
+    }
+    public void faq( View v){
+        Intent intent = new Intent(DataActivity.this, ActivityFaq.class);
         startActivity(intent);
     }
 }

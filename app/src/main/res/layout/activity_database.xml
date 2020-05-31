@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:theme="@style/BasicTheme"
+        android:background="@color/colorPrimary"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:fillViewport="true"
+        >
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        >
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="16dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginBottom="6dp"
+        android:text="COVID-19 FAQs"
+        android:gravity="center"
+        android:textSize="25sp"
+        android:fontFamily="@font/latoregular"
+        />
+     <TextView
+         android:layout_width="match_parent"
+         android:layout_height="wrap_content"
+         android:layout_marginHorizontal="16dp"
+         android:text="(Source WHO official website)"
+         android:textSize="18sp"
+         android:gravity="center"
+         android:fontFamily="@font/latoregular"
+         />
+        <ExpandableListView
+            android:id="@+id/expandableListView"
+            android:layout_height="match_parent"
+            android:layout_marginTop="16dp"
+            android:layout_marginHorizontal="12dp"
+            android:layout_width="match_parent"
+            android:elevation="8dp"
+            android:groupIndicator="@null"
+            android:divider="@null"
+            android:dividerHeight="0dp" />
+
+    </LinearLayout>
+    </ScrollView>
+</LinearLayout>

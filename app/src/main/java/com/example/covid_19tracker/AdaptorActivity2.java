@@ -41,7 +41,15 @@ public class AdaptorActivity2 extends RecyclerView.Adapter<AdaptorActivity2.View
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         final CatItems CatItem = CatItems.get(position);
-        holder.category.setText(CatItem.getCategory());
+        if(CatItem.getCategory().contains("Testing")){
+            holder.image.setImageResource(R.drawable.testing);
+        }
+        else if(CatItem.getCategory().contains("Food")){
+            holder.image.setImageResource(R.drawable.freefood);
+        }
+        else{
+            holder.image.setImageResource(R.drawable.hospital);
+        }
         holder.nameoforg.setText(CatItem.getname());
         holder.description.setText(CatItem.getDescription());
         holder.phoneNumber.setOnClickListener(new View.OnClickListener() {
@@ -71,12 +79,12 @@ public class AdaptorActivity2 extends RecyclerView.Adapter<AdaptorActivity2.View
 
     class ViewHolder extends RecyclerView.ViewHolder {
 
-        TextView category,nameoforg,description;
-        ImageView contact,phoneNumber;
+        TextView nameoforg,description;
+        ImageView contact,phoneNumber,image;
 
         ViewHolder(@NonNull View itemView) {
             super(itemView);
-            category=itemView.findViewById(R.id.category);
+            image=itemView.findViewById(R.id.image_type);
             nameoforg=itemView.findViewById(R.id.nameOforg);
             description=itemView.findViewById(R.id.description);
             phoneNumber=itemView.findViewById(R.id.phoneNumber);

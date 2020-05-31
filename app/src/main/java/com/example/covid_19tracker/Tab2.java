@@ -14,6 +14,7 @@ import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -71,6 +72,8 @@ public class Tab2 extends Fragment {
     private static final String URL="https://api.covid19india.org/data.json";
     private ArrayList<String> date;
     private Integer value=1000;
+    private TextView totalCases,timeStamp;
+    private LinearLayout linearLayout;
 
     // TODO: Rename and change types of parameters
     private String mParam1;
@@ -120,11 +123,14 @@ public class Tab2 extends Fragment {
                              Bundle savedInstanceState) {
         View view =inflater.inflate(R.layout.fragment_tab2, container, false);
 
-        if (getArguments() != null) {
-            value = getArguments().getInt("Theme",999);
-        }
+//        if (getArguments() != null) {
+//            value = getArguments().getInt("Theme",999);
+//        }
         date=new ArrayList<String>();
 
+        totalCases=view.findViewById(R.id.total_tests);
+        timeStamp=view.findViewById(R.id.time_stamp);
+        linearLayout=view.findViewById(R.id.linearLayout);
 
         mChart = (LineChart) view.findViewById(R.id.line_chart);
         mChart.setNoDataText("Loading...");
@@ -179,7 +185,6 @@ public class Tab2 extends Fragment {
         YAxis yAxisbl=barChart3.getAxisLeft();
         yAxisbl.setAxisMinimum(0f);
 
-
         extractData();
         Legend l = mChart.getLegend();
         l.setForm(Legend.LegendForm.LINE);
@@ -201,54 +206,69 @@ public class Tab2 extends Fragment {
         YAxis yAxis2 =mChart.getAxisLeft();
         yAxis2.setAxisMinimum(0f);
 
+        mChart.setNoDataTextColor(Color.GRAY);
+        mChart.getAxisRight().setTextColor(Color.GRAY);
+        mChart.getXAxis().setTextColor(Color.GRAY);
+        l.setTextColor(Color.GRAY);
+        ll.setTextColor(Color.GRAY);
+        lll.setTextColor(Color.GRAY);
+        l3.setTextColor(Color.GRAY);
+        barChart.setNoDataTextColor(Color.GRAY);
+        barChart.getAxisRight().setTextColor(Color.GRAY);
+        barChart.getXAxis().setTextColor(Color.GRAY);
+
+        barChart2.setNoDataTextColor(Color.GRAY);
+        barChart2.getAxisRight().setTextColor(Color.GRAY);
+        barChart2.getXAxis().setTextColor(Color.GRAY);
+
+        barChart3.setNoDataTextColor(Color.GRAY);
+        barChart3.getAxisRight().setTextColor(Color.GRAY);
+        barChart3.getXAxis().setTextColor(Color.GRAY);
 
 
-        if(value%2==0){
-            mChart.setNoDataTextColor(Color.BLACK);
-            mChart.getAxisRight().setTextColor(Color.BLACK);
-            mChart.getXAxis().setTextColor(Color.BLACK);
-            l.setTextColor(Color.BLACK);
-            ll.setTextColor(Color.BLACK);
-            lll.setTextColor(Color.BLACK);
-            l3.setTextColor(Color.BLACK);
-            barChart.setNoDataTextColor(Color.BLACK);
-            barChart.getAxisRight().setTextColor(Color.BLACK);
-            barChart.getXAxis().setTextColor(Color.BLACK);
+//        if(value%2==0){
+//            mChart.setNoDataTextColor(Color.BLACK);
+//            mChart.getAxisRight().setTextColor(Color.BLACK);
+//            mChart.getXAxis().setTextColor(Color.BLACK);
+//            l.setTextColor(Color.BLACK);
+//            ll.setTextColor(Color.BLACK);
+//            lll.setTextColor(Color.BLACK);
+//            l3.setTextColor(Color.BLACK);
+//            barChart.setNoDataTextColor(Color.BLACK);
+//            barChart.getAxisRight().setTextColor(Color.BLACK);
+//            barChart.getXAxis().setTextColor(Color.BLACK);
+//
+//            barChart2.setNoDataTextColor(Color.BLACK);
+//            barChart2.getAxisRight().setTextColor(Color.BLACK);
+//            barChart2.getXAxis().setTextColor(Color.BLACK);
+//
+//            barChart3.setNoDataTextColor(Color.BLACK);
+//            barChart3.getAxisRight().setTextColor(Color.BLACK);
+//            barChart3.getXAxis().setTextColor(Color.BLACK);
+//
+//        }
+//        else{
+//            mChart.setNoDataTextColor(Color.WHITE);
+//            mChart.getAxisRight().setTextColor(Color.WHITE);
+//            mChart.getXAxis().setTextColor(Color.WHITE);
+//            l.setTextColor(Color.WHITE);
+//            ll.setTextColor(Color.WHITE);
+//            lll.setTextColor(Color.WHITE);
+//            l3.setTextColor(Color.WHITE);
+//            barChart.setNoDataTextColor(Color.WHITE);
+//            barChart.getAxisRight().setTextColor(Color.WHITE);
+//            barChart.getXAxis().setTextColor(Color.WHITE);
+//
+//            barChart2.setNoDataTextColor(Color.WHITE);
+//            barChart2.getAxisRight().setTextColor(Color.WHITE);
+//            barChart2.getXAxis().setTextColor(Color.WHITE);
+//
+//            barChart3.setNoDataTextColor(Color.WHITE);
+//            barChart3.getAxisRight().setTextColor(Color.WHITE);
+//            barChart3.getXAxis().setTextColor(Color.WHITE);
+//        }
 
-            barChart2.setNoDataTextColor(Color.BLACK);
-            barChart2.getAxisRight().setTextColor(Color.BLACK);
-            barChart2.getXAxis().setTextColor(Color.BLACK);
 
-            barChart3.setNoDataTextColor(Color.BLACK);
-            barChart3.getAxisRight().setTextColor(Color.BLACK);
-            barChart3.getXAxis().setTextColor(Color.BLACK);
-
-        }
-        else{
-            mChart.setNoDataTextColor(Color.WHITE);
-            mChart.getAxisRight().setTextColor(Color.WHITE);
-            mChart.getXAxis().setTextColor(Color.WHITE);
-            l.setTextColor(Color.WHITE);
-            ll.setTextColor(Color.WHITE);
-            lll.setTextColor(Color.WHITE);
-            l3.setTextColor(Color.WHITE);
-            barChart.setNoDataTextColor(Color.WHITE);
-            barChart.getAxisRight().setTextColor(Color.WHITE);
-            barChart.getXAxis().setTextColor(Color.WHITE);
-
-            barChart2.setNoDataTextColor(Color.WHITE);
-            barChart2.getAxisRight().setTextColor(Color.WHITE);
-            barChart2.getXAxis().setTextColor(Color.WHITE);
-
-            barChart3.setNoDataTextColor(Color.WHITE);
-            barChart3.getAxisRight().setTextColor(Color.WHITE);
-            barChart3.getXAxis().setTextColor(Color.WHITE);
-        }
-
-        mChart.invalidate();
-        barChart.invalidate();
-        barChart2.invalidate();
-        barChart3.invalidate();
 
         return view;
     }
@@ -261,6 +281,11 @@ public class Tab2 extends Fragment {
                 try {
                     JSONObject jsonObject = new JSONObject(response);
                     JSONArray jsonArray =jsonObject.getJSONArray("cases_time_series");
+                    JSONArray testedArray = jsonObject.getJSONArray("tested");
+                    JSONObject tested = testedArray.getJSONObject(testedArray.length()-1);
+                    totalCases.setText(tested.getString("totalsamplestested"));
+                    String xx= "as per " + tested.getString("updatetimestamp").substring(0,10);
+                    timeStamp.setText(xx);
                     ArrayList<Entry> yVals=new ArrayList<>();
                     ArrayList<Entry> yVals1=new ArrayList<>();
                     ArrayList<Entry> yVals2=new ArrayList<>();
@@ -286,9 +311,9 @@ public class Tab2 extends Fragment {
                     BarDataSet dataset = new BarDataSet(byVals,"DailyCases");
                     dataset.setColor(Color.rgb(255, 51, 51));
                     BarDataSet dataSet1=new BarDataSet(byVals1,"DailyRecovered");
-                    dataSet1.setColor(Color.argb(90,0, 231, 0));
+                    dataSet1.setColor(Color.rgb(78, 228, 78));
                     BarDataSet dataSet2=new BarDataSet(byVals2,"DailyDeceased");
-                    dataSet2.setColor(Color.argb(80,50,50,225));
+                    dataSet2.setColor(Color.rgb(28,28,240));
 
 
                     // create a dataset and give it a type
@@ -389,7 +414,10 @@ public class Tab2 extends Fragment {
                     barChart3.setData(barData2);
                     IMarker marker3 = new MyMarkerView(getContext(),R.layout.custom_marker_view,xVals);
                     barChart3.setMarker(marker3);
-
+                    mChart.invalidate();
+                    barChart.invalidate();
+                    barChart2.invalidate();
+                    barChart3.invalidate();
 
                 } catch (JSONException e) {
                     e.printStackTrace();

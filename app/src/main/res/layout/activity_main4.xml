@@ -60,43 +60,43 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
+            android:fontFamily="@font/latoregular"
             android:textSize="20sp"
             android:text="APP DEVELOPER"
             />
-
-        <Button
-            android:id="@+id/btn_github"
+        <LinearLayout
             android:layout_width="match_parent"
+            android:layout_height="150dp"
+            android:orientation="horizontal"
+            android:weightSum="1"
+            >
+        <ImageButton
+            android:id="@+id/btn_github"
+            android:padding="16dp"
+            android:layout_width="0dp"
+            android:layout_marginEnd="8dp"
+            android:scaleType="centerInside"
+            android:layout_weight="0.5"
             android:layout_height="wrap_content"
+            android:src="@drawable/github"
             android:background="@drawable/btn_round2"
             android:layout_margin="16dp"
-            android:text="Git Hub"
             android:onClick="github"
             />
-
-
-        <Button
+        <ImageButton
+            android:scaleType="centerInside"
             android:id="@+id/btn_call"
-            android:layout_width="match_parent"
+            android:padding="16dp"
+            android:layout_width="0dp"
+            android:layout_weight="0.5"
+            android:layout_marginEnd="8dp"
             android:layout_height="wrap_content"
+            android:src="@drawable/facebook"
             android:background="@drawable/btn_round2"
             android:layout_margin="16dp"
-            android:text="Phone Number"
-            android:onClick="call"
-            />
-
-
-        <Button
-            android:id="@+id/btn_facebook"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@drawable/btn_round2"
-            android:layout_margin="16dp"
-            android:text="Facebook"
             android:onClick="facebook"
             />
-
-
+        </LinearLayout>
     </LinearLayout>
 </ScrollView>
 </LinearLayout>

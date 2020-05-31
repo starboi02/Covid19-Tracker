@@ -22,14 +22,12 @@
         </activity>
         <activity android:name=".MainActivity3" android:parentActivityName=".MainActivity2"></activity>
         <activity android:name=".MainActivity4" android:parentActivityName=".MainActivity2"></activity>
-        <activity android:name=".DataActivity" android:parentActivityName=".LoginActivity">
+        <activity android:name=".DataActivity" android:parentActivityName=".MainActivity">
         </activity>
         <activity android:name=".DistActivity" android:parentActivityName=".MainActivity2"/>
         <activity android:name=".GlobalActivity" android:parentActivityName=".DataActivity"/>
-        <activity android:name=".WelcomeActivity" android:parentActivityName=".MainActivity"/>
-        <activity android:name=".RegisterActivity" android:parentActivityName=".WelcomeActivity"/>
-        <activity android:name=".LoginActivity" android:parentActivityName=".WelcomeActivity"/>
         <activity android:name=".AdvisoryActivity" android:parentActivityName=".DataActivity"/>
+        <activity android:name=".ActivityFaq" android:parentActivityName=".DataActivity"/>
     </application>
 
 </manifest>

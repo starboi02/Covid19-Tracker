@@ -2,6 +2,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:id="@+id/linearLayout"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical">
     <androidx.appcompat.widget.Toolbar
@@ -23,13 +24,13 @@
             android:layout_height="wrap_content"
             android:paddingBottom="32dp"
             >
-
             <com.synnapps.carouselview.CarouselView
                 android:id="@+id/carouselView"
                 android:layout_width="match_parent"
                 android:layout_height="290dp"
-                app:fillColor="#FFFFFF"
+                app:fillColor="#FFFFFFFF"
                 app:radius="3dp"
+                app:pageColor="#00000000"
                 app:slideInterval="2000"
                 app:strokeColor="#FF777777"
                 app:strokeWidth="1dp"/>
@@ -38,6 +39,7 @@
                 android:layout_height="wrap_content"
                 android:textSize="40sp"
                 android:text="Covid-19 Tracker"
+                android:fontFamily="@font/latoregular"
                 android:layout_marginBottom="32dp"
                 android:layout_marginTop="32dp"
                 android:layout_gravity="center"/>
@@ -48,7 +50,9 @@
                 android:weightSum="1"
                 android:paddingHorizontal="20dp"
                 android:orientation="horizontal"
-                android:layout_margin="16dp"
+                android:layout_marginLeft="16dp"
+                android:layout_marginRight="16dp"
+                android:layout_marginBottom="8dp"
                 >
             <ImageButton
                 android:id="@+id/btn_national"
@@ -80,7 +84,9 @@
                 android:weightSum="1"
                 android:paddingHorizontal="20dp"
                 android:orientation="horizontal"
-                android:layout_margin="16dp"
+                android:layout_marginLeft="16dp"
+                android:layout_marginRight="16dp"
+                android:layout_marginBottom="8dp"
                 >
                 <ImageButton
                     android:id="@+id/btn_about"
@@ -111,7 +117,9 @@
                 android:weightSum="1"
                 android:paddingHorizontal="20dp"
                 android:orientation="horizontal"
-                android:layout_margin="16dp"
+                android:layout_marginLeft="16dp"
+                android:layout_marginRight="16dp"
+                android:layout_marginBottom="8dp"
                 >
                 <ImageButton
                     android:layout_width="0dp"
@@ -130,10 +138,10 @@
                     android:layout_weight="0.5"
                     android:layout_marginLeft="4dp"
                     android:background="@drawable/btn_round2"
-                    android:src="@drawable/data"
+                    android:src="@drawable/faq"
                     android:paddingVertical="22dp"
                     android:scaleType="centerInside"
-                    android:onClick="National"
+                    android:onClick="faq"
                     />
             </LinearLayout>
 

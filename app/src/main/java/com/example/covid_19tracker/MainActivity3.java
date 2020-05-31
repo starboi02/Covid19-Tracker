@@ -9,16 +9,15 @@ import android.text.method.LinkMovementMethod;
 import android.widget.TextView;
 
 public class MainActivity3 extends AppCompatActivity {
-
+    int j=0;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         themeUtils.onActivityCreateSetTheme(this);
         setContentView(R.layout.activity_main3);
-
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
 
-        toolbar.setTitle("Covid-19 Tracker");
+        toolbar.setTitle("Covid-19 Outbreak");
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setDisplayShowHomeEnabled(true);

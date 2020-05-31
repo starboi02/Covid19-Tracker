@@ -8,4 +8,6 @@
     <color name="color">#ffcdd2</color>
     <color name="color2">#e57373</color>
     <color name="white">#FFFFFF</color>
+    <color name="background">#1b1b26</color>
+    <color name="light">#f0ece2</color>
 </resources>

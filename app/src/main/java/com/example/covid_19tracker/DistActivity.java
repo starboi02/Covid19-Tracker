@@ -99,64 +99,6 @@ public class DistActivity extends AppCompatActivity {
         catItems=new ArrayList<>();
     }
 
-    private void loadRecyclerViewData(final String dist, final String state){
-        final ProgressDialog progressDialog = new ProgressDialog(this);
-        progressDialog.setMessage("Loading data....");
-        progressDialog.show();
-
-        StringRequest stringRequest = new StringRequest(Request.Method.GET, URL_res, new Response.Listener<String>() {
-            @Override
-            public void onResponse(String response) {
-                progressDialog.dismiss();
-                try{
-                    JSONObject jsonObject =new JSONObject(response);
-                    JSONArray jsonArray = jsonObject.getJSONArray("resources");
-                    catItems.clear();
-                    for(int i=0;i<jsonArray.length();i++){
-                        JSONObject resource=jsonArray.getJSONObject(i);
-                        if(resource.getString("city").equals("Gurgaon") && dist.equals("Gurugram")){
-                            String phoneNumber=resource.getString("phonenumber");
-                            CatItems items =new CatItems(
-                                    resource.getString("category"),
-                                    resource.getString("nameoftheorganisation"),
-                                    resource.getString("descriptionandorserviceprovided"),
-                                    phoneNumber,
-                                    resource.getString("contact")
-                            );
-                            catItems.add(items);
-                        }
-                        else if(resource.getString("city").equals(dist) || resource.getString("city").equals(state)){
-                            String phoneNumber=resource.getString("phonenumber");
-                            CatItems items =new CatItems(
-                                    resource.getString("category"),
-                                    resource.getString("nameoftheorganisation"),
-                                    resource.getString("descriptionandorserviceprovided"),
-                                    phoneNumber,
-                                    resource.getString("contact")
-                            );
-                            catItems.add(items);
-                        }
-                    }
-                    adapter = new AdaptorActivity2(catItems, getApplicationContext());
-                    recyclerView.setAdapter(adapter);
-                } catch (JSONException e) {
-                    e.printStackTrace();
-                }
-            }
-        },
-                new Response.ErrorListener() {
-                    @Override
-                    public void onErrorResponse(VolleyError error) {
-
-                    }
-                }
-        );
-
-        RequestQueue requestQueue = Volley.newRequestQueue(this);
-        requestQueue.add(stringRequest);
-    }
-
-
     public void setData(final String dist, final String state){
         final TextView dist_name = findViewById(R.id.district_info);
         final TextView dist_active = findViewById(R.id.inc_active);
@@ -255,7 +197,9 @@ public class DistActivity extends AppCompatActivity {
                         String key = iter.next();
                         StateName.add(key);
                     }
-                    spinner.setAdapter(new ArrayAdapter<String>(DistActivity.this, android.R.layout.simple_spinner_dropdown_item, StateName));
+                    ArrayAdapter arrayAdapter =new ArrayAdapter<>(DistActivity.this,android.R.layout.simple_spinner_dropdown_item, StateName);
+                    arrayAdapter.setDropDownViewResource(R.layout.custom_spinner_item);
+                    spinner.setAdapter(arrayAdapter);
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
@@ -295,7 +239,9 @@ public class DistActivity extends AppCompatActivity {
                             }
                         }
                     }
-                    spinner_district.setAdapter(new ArrayAdapter<String>(DistActivity.this, android.R.layout.simple_spinner_dropdown_item, DistName));
+                    ArrayAdapter arrayAdapter2= new ArrayAdapter<String>(DistActivity.this, android.R.layout.simple_spinner_dropdown_item, DistName);
+                    arrayAdapter2.setDropDownViewResource(R.layout.custom_spinner_item);
+                    spinner_district.setAdapter(arrayAdapter2);
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
@@ -309,6 +255,64 @@ public class DistActivity extends AppCompatActivity {
         int socketTimeout = 30000;
         RetryPolicy policy = new DefaultRetryPolicy(socketTimeout, DefaultRetryPolicy.DEFAULT_MAX_RETRIES, DefaultRetryPolicy.DEFAULT_BACKOFF_MULT);
         stringRequest.setRetryPolicy(policy);
+        requestQueue.add(stringRequest);
+    }
+    private void loadRecyclerViewData(final String dist, final String state){
+        final ProgressDialog progressDialog = new ProgressDialog(this,R.style.Theme_MyDialog);
+        progressDialog.setMessage("Loading data....");
+        progressDialog.show();
+
+        StringRequest stringRequest = new StringRequest(Request.Method.GET, URL_res, new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+                progressDialog.dismiss();
+                try{
+                    JSONObject jsonObject =new JSONObject(response);
+                    JSONArray jsonArray = jsonObject.getJSONArray("resources");
+                    catItems.clear();
+                    for(int i=0;i<jsonArray.length();i++){
+                        JSONObject resource=jsonArray.getJSONObject(i);
+                        if(resource.getString("city").equals("Gurgaon") && dist.equals("Gurugram")){
+                            String phoneNumber=resource.getString("phonenumber");
+                            CatItems items =new CatItems(
+                                    resource.getString("category"),
+                                    resource.getString("nameoftheorganisation"),
+                                    resource.getString("descriptionandorserviceprovided"),
+                                    phoneNumber,
+                                    resource.getString("contact")
+                            );
+                            catItems.add(items);
+                        }
+                        else if(resource.getString("city").equals(dist) || resource.getString("city").equals(state)){
+                            String phoneNumber=resource.getString("phonenumber");
+                            CatItems items =new CatItems(
+                                    resource.getString("category"),
+                                    resource.getString("nameoftheorganisation"),
+                                    resource.getString("descriptionandorserviceprovided"),
+                                    phoneNumber,
+                                    resource.getString("contact")
+                            );
+                            catItems.add(items);
+                        }
+                        if(catItems.size()==10)
+                            break;
+                    }
+                    adapter = new AdaptorActivity2(catItems, getApplicationContext());
+                    recyclerView.setAdapter(adapter);
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+            }
+        },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+
+                    }
+                }
+        );
+
+        RequestQueue requestQueue = Volley.newRequestQueue(this);
         requestQueue.add(stringRequest);
     }
 }

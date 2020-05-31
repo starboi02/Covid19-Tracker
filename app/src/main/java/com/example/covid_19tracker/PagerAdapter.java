@@ -9,12 +9,12 @@ import androidx.fragment.app.FragmentStatePagerAdapter;
 public class PagerAdapter extends FragmentStatePagerAdapter {
 
     int mNoOfTabs;
-    private final Bundle fragmentBundle;
+//    private final Bundle fragmentBundle;
 
-    public PagerAdapter(FragmentManager fm, int NumberOfTabs,Bundle data)
+    public PagerAdapter(FragmentManager fm, int NumberOfTabs)
     {
         super(fm);
-        fragmentBundle=data;
+//        fragmentBundle=data;
         this.mNoOfTabs = NumberOfTabs;
     }
 
@@ -29,7 +29,7 @@ public class PagerAdapter extends FragmentStatePagerAdapter {
                 return tab1;
             case 1:
                 Tab2 tab2 = new Tab2();
-                tab2.setArguments(this.fragmentBundle);
+//                tab2.setArguments(this.fragmentBundle);
                 return  tab2;
             default:
                 return null;

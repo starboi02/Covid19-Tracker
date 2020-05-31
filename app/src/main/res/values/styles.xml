@@ -1,15 +1,15 @@
 <resources>
 
-    <!-- Base application theme. -->
     <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
-        <!-- Customize your theme here. -->
+        <item name="android:windowBackground">#121212</item>
         <item name="android:textColor">#f0ece2</item>
-        <item name="android:background">#222831</item>
+        <item name="colorPrimaryDark">#000000</item>
         <item name="colorAccent">#e14594</item>
     </style>
     <style name="LightTheme" parent="Theme.AppCompat.Light.NoActionBar">
-        <item name="android:background">#f0ece2</item>
+        <item name="android:windowBackground">#f0ece2</item>
         <item name="android:textColor">#000000</item>
+        <item name="colorPrimaryDark">@android:color/black</item>
         <item name="colorPrimary">#ec625f</item>
 
     </style>
@@ -25,5 +25,12 @@
         <item name="colorAccent">#e14594</item>
     </style>
 
-
+    <style name="CarouselTheme" parent="Theme.AppCompat.Light.NoActionBar">
+        <item name="android:windowBackground">#121212</item>
+        <item name="android:textColor">#f0ece2</item>
+        <item name="colorAccent">#e14594</item>
+    </style>
+    <style name="Theme_MyDialog" parent="@android:style/Theme.Dialog">
+        <item name="android:textColor">@android:color/darker_gray</item>
+    </style>
 </resources>

@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 
+import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -66,6 +67,7 @@ public class Tab1 extends Fragment {
     private Map<String,Integer> hsh = new HashMap<>();
     private String natCases,natRecovered,natDeceased,total,totalRec,totalDec;
     private String arrow="\u2191";
+    private String down="\u2193";
 
 
 
@@ -116,16 +118,15 @@ public class Tab1 extends Fragment {
             }
         });
 
-        recyclerView=view.findViewById(R.id.recycler_view);
-        recyclerView.setHasFixedSize(true);
-        recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
-
-
         listItems=new ArrayList<>();
         show=new ArrayList<>();
         empty=new ArrayList<>();
 
         loadRecyclerViewData();
+        recyclerView=view.findViewById(R.id.recycler_view);
+        recyclerView.setHasFixedSize(true);
+        recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
+
 
         return view;
 
@@ -139,7 +140,7 @@ public class Tab1 extends Fragment {
     }
 
     private void loadRecyclerViewData(){
-        final ProgressDialog progressDialog = new ProgressDialog(getActivity());
+        final ProgressDialog progressDialog = new ProgressDialog(getActivity(),R.style.Theme_MyDialog);
         progressDialog.setMessage("Loading data....");
         progressDialog.show();
 
@@ -183,25 +184,35 @@ public class Tab1 extends Fragment {
                     }
                 }
         );
-
-        RequestQueue requestQ = Volley.newRequestQueue(getActivity());
-        requestQ.add(request);
-
+            RequestQueue requestQ = Volley.newRequestQueue(getActivity());
+            requestQ.add(request);
 
         StringRequest stringRequest = new StringRequest(Request.Method.GET, URL_DATA, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
-                progressDialog.dismiss();
                 try {
                     JSONObject jsonObject = new JSONObject(response);
                     Iterator<String> iter = jsonObject.keys();
                     String name="Dadra and Nagar Haveli and Daman and Diu";
                     int z=1;
                     String str = "Total Cases";
+                    int x=0,y=0;
+                    if((total!=null && totalDec!=null) && totalRec!=null) {
+                         x = Integer.parseInt(total) - Integer.parseInt(totalDec) - Integer.parseInt(totalRec);
+                    }
+                    if((natCases!=null&& natRecovered!=null)&& natDeceased!=null) {
+                        y = Integer.parseInt(natCases) - Integer.parseInt(natRecovered) - Integer.parseInt(natDeceased);
+                    }
+                    String temp;
+                    if(y<0)
+                    temp=down+(y*-1);
+                    else
+                        temp=arrow+y;
                     ListItems item = new ListItems(
                             str,
                             total,
-                            totalRec,totalDec,arrow+natCases,arrow+natRecovered,arrow+natDeceased
+                            String.valueOf(x),
+                            totalRec,totalDec,arrow+natCases,temp,arrow+natRecovered,arrow+natDeceased
                     );
                     listItems.add(item);
                     while(iter.hasNext()){
@@ -211,11 +222,24 @@ public class Tab1 extends Fragment {
                         if(key.equals(name)){
                             key="Dadra and Nagar Haveli";
                         }
+                        int xx=0,yy=0;
+                        if((cases.get(code)!=null&&recovered.get(code)!=null)&&deceased.get(code)!=null) {
+                            xx = Integer.parseInt(cases.get(code)) - Integer.parseInt(recovered.get(code)) - Integer.parseInt(deceased.get(code));
+                        }
+                        if((incCases.get(code)!=null&& incRecovered!=null)&& incDeceased.get(code)!=null) {
+                            yy = Integer.parseInt(incCases.get(code)) - Integer.parseInt(incRecovered.get(code)) - Integer.parseInt(incDeceased.get(code));
+                        }
+                        String o;
+                        if(yy<0)
+                            o=down+(yy*-1);
+                        else
+                            o=arrow+yy;
                         ListItems items = new ListItems(
                                 key,
                                 cases.get(code),
+                                String.valueOf(xx),
                                 recovered.get(code),
-                                deceased.get(code),arrow+incCases.get(code),arrow+incRecovered.get(code),arrow+incDeceased.get(code)
+                                deceased.get(code),arrow+incCases.get(code),o,arrow+incRecovered.get(code),arrow+incDeceased.get(code)
                         );
                         hsh.put(key,z);
                         listItems.add(items);
@@ -236,9 +260,10 @@ public class Tab1 extends Fragment {
                     }
                 }
         );
-
-        RequestQueue requestQueue = Volley.newRequestQueue(getActivity());
-        requestQueue.add(stringRequest);
+        if(getActivity()!=null) {
+            RequestQueue requestQueue = Volley.newRequestQueue(getActivity());
+            requestQueue.add(stringRequest);
+        }
     }
 
     // TODO: Rename method, update argument and hook method into UI event
@@ -249,7 +274,7 @@ public class Tab1 extends Fragment {
     }
 
     @Override
-    public void onAttach(Context context) {
+    public void onAttach(@NonNull Context context) {
         super.onAttach(context);
         if (context instanceof OnFragmentInteractionListener) {
             mListener = (OnFragmentInteractionListener) context;

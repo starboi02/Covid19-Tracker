@@ -5,127 +5,168 @@
     android:id="@+id/menu_item_card_view"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:background="#222831"
+    android:background="@color/background"
     android:orientation="vertical"
+    card_view:cardBackgroundColor="@color/background"
     android:layout_marginBottom="6dp"
-    card_view:cardCornerRadius="8dp"
+    card_view:cardCornerRadius="20dp"
     card_view:cardElevation="8dp"
     >
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="#30475e"
+        android:background="@color/background"
         android:padding="10dp"
-        android:orientation="horizontal"
         android:weightSum="1"
+        android:orientation="vertical"
         >
 
 
         <TextView
             android:id="@+id/main_state"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.4"
             android:layout_margin="5dp"
-            android:background="@drawable/btn_round"
             android:padding="4dp"
             android:text="State"
+            android:fontFamily="@font/latoregular"
+            android:layout_marginBottom="8dp"
+            android:background="@color/background"
             android:gravity="center"
             android:singleLine="false"
-            android:textColor="#000000"
-            android:textSize="13sp"
-            android:layout_weight=".4"
-            android:paddingBottom="2dp"
+            android:textColor="#FFFFFF"
+            android:textSize="24sp"
             android:maxEms="11"
             />
         <LinearLayout
-            android:layout_width="0dp"
-            android:layout_weight=".2"
-            android:background="#30475e"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical">
+            android:layout_weight="0.7"
+            android:gravity="bottom"
+            android:fontFamily="@font/latoregular"
+            android:weightSum="1.2"
+            android:background="@color/background"
+            android:orientation="horizontal">
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_weight="0.3"
+            android:background="@color/background"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            >
         <TextView
             android:id="@+id/main_active"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             android:layout_margin="5dp"
-            android:background="@drawable/btn_round"
+            android:background="@color/background"
             android:gravity="center"
             android:text="Total"
-            android:textColor="#000000"
-            android:textSize="11sp"
+            android:textColor="#FFFE0739"
+            android:textSize="20sp"
              />
         <TextView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_margin="5dp"
-            android:background="@drawable/btn_round"
+            android:background="@color/background"
             android:gravity="center"
-            android:text="ActInc"
+            android:text="..."
             android:id="@+id/inc_active"
-            android:textColor="#FF0000"
-            android:textSize="11sp"/>
-
+            android:textColor="#e60e2b"
+            android:textSize="15sp"/>
         </LinearLayout>
-        <LinearLayout
-            android:layout_width="0dp"
-            android:layout_weight=".2"
-            android:background="#30475e"
-            android:layout_height="wrap_content"
-            android:orientation="vertical">
-            <TextView
-                android:id="@+id/main_recovered"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_margin="5dp"
-                android:background="@drawable/btn_round"
-                android:gravity="center"
-                android:text="Cured"
-                android:textColor="#000000"
-                android:textSize="11sp"
-                />
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_margin="5dp"
-                android:background="@drawable/btn_round"
-                android:gravity="center"
-                android:text="RecInc"
-                android:id="@+id/inc_recovered"
-                android:textColor="#008000"
-                android:textSize="11sp"/>
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_weight="0.3"
+                android:background="@color/background"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                >
+                <TextView
+                    android:id="@+id/main_new"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="5dp"
+                    android:background="@color/background"
+                    android:gravity="center"
+                    android:text="Active"
+                    android:textColor="#FF1f5ccf"
+                    android:textSize="20sp"
+                    />
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_margin="5dp"
+                    android:background="@color/background"
+                    android:gravity="center"
+                    android:text="..."
+                    android:id="@+id/inc_new"
+                    android:textColor="#1f5ccf"
+                    android:textSize="15sp"/>
+            </LinearLayout>
 
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_weight="0.3"
+                android:background="@color/background"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                >
+                <TextView
+                    android:id="@+id/main_recovered"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="5dp"
+                    android:background="@color/background"
+                    android:gravity="center"
+                    android:text="Cured"
+                    android:textColor="#16c952"
+                    android:textSize="20sp"
+                    />
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_margin="5dp"
+                    android:background="@color/background"
+                    android:gravity="center"
+                    android:text="..."
+                    android:id="@+id/inc_recovered"
+                    android:textColor="#16c952"
+                    android:textSize="15sp"/>
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_weight="0.3"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:background="@color/background"
+                >
+                <TextView
+                    android:id="@+id/main_deceased"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="5dp"
+                    android:background="@color/background"
+                    android:gravity="center"
+                    android:text="Death"
+                    android:textColor="#f27507"
+                    android:textSize="20sp"
+                    />
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_margin="5dp"
+                    android:background="@color/background"
+                    android:gravity="center"
+                    android:text="..."
+                    android:id="@+id/inc_deceased"
+                    android:textColor="#f27507"
+                    android:textSize="15sp"/>
+            </LinearLayout>
         </LinearLayout>
-        <LinearLayout
-            android:layout_width="0dp"
-            android:layout_weight=".2"
-            android:background="#30475e"
-            android:layout_height="wrap_content"
-            android:orientation="vertical">
-            <TextView
-                android:id="@+id/main_deceased"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_margin="5dp"
-                android:background="@drawable/btn_round"
-                android:gravity="center"
-                android:text="Death"
-                android:textColor="#000000"
-                android:textSize="11sp"
-                />
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_margin="5dp"
-                android:background="@drawable/btn_round"
-                android:gravity="center"
-                android:text="DecInc"
-                android:id="@+id/inc_deceased"
-                android:textColor="#FF4500"
-                android:textSize="11sp"/>
-
-        </LinearLayout>
-
     </LinearLayout>
 
 </androidx.cardview.widget.CardView>

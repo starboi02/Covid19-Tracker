@@ -4,8 +4,13 @@
     <string name="mhfo"><a href="https://www.mohfw.gov.in/">\u2022   Ministry of Health and Family Affairs</a></string>
     <string name="guide"><a href="https://www.mohfw.gov.in/pdf/GuidelinesforHomeIsolationofverymildpresymptomaticCOVID19cases.pdf">\u2022   Guidelines for isolation of mild symptomatic patients</a></string>
     <string name="UpArrow">U+2191</string>
+    <string name="Down">U+2193</string>
     <string name="Right">\u25B6</string>
-    <string name="Header"><u>Protection from the spread of COVID-19</u></string>
+    <string name="Header"><u>Stopping the spread of COVID-19</u></string>
+    <string name="Header2"><u><b>Covid-19 Outbreak</b></u></string>
+    <string name="Symptoms"><u>Symptoms</u></string>
+    <string name="links"><u>Some useful links</u></string>
+    <string name="prevention"><u>Prevention</u></string>
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>

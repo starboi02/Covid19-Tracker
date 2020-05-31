@@ -24,6 +24,8 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.SearchView;
 import androidx.appcompat.widget.Toolbar;
+import androidx.cardview.widget.CardView;
+import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -47,6 +49,7 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 import java.util.Set;
 
 public class GlobalActivity extends AppCompatActivity {
@@ -54,9 +57,12 @@ public class GlobalActivity extends AppCompatActivity {
     private static final String URL_DATA="https://api.covid19api.com/summary";
 
     private RecyclerView recyclerView;
+    private CardView cardView;
     private RecyclerView.Adapter adapter;
     private List<ListItems> listItems,showList,empty;
     private Map<String,Integer> hsh=new HashMap<>();
+    private String arrow="\u2191";
+    private String down="\u2193";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -68,7 +74,7 @@ public class GlobalActivity extends AppCompatActivity {
 
         toolbar.setTitle("World Data");
         setSupportActionBar(toolbar);
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        Objects.requireNonNull(getSupportActionBar()).setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setDisplayShowHomeEnabled(true);
 
         recyclerView=findViewById(R.id.recycler_view);
@@ -78,6 +84,8 @@ public class GlobalActivity extends AppCompatActivity {
         listItems=new ArrayList<>();
         showList=new ArrayList<>();
         empty=new ArrayList<>();
+        cardView=findViewById(R.id.menu_item_card_view);
+//        recyclerView.getBackground().setAlpha(0);
 
         loadRecyclerViewData();
 
@@ -114,7 +122,7 @@ public class GlobalActivity extends AppCompatActivity {
                         Map.Entry entry = (Map.Entry) itr.next();
                         String str = (String) entry.getKey();
                         if (str.length() >= newText.length()) {
-                            if (str.substring(0, newText.length()).equals(newText)) {
+                            if (str.substring(0, newText.length()).toLowerCase().equals(newText.toLowerCase())) {
                                 showList.add(listItems.get((Integer) entry.getValue()));
                                 flag = 0;
                             }
@@ -141,7 +149,7 @@ public class GlobalActivity extends AppCompatActivity {
     }
 
     private void loadRecyclerViewData(){
-        final ProgressDialog progressDialog = new ProgressDialog(this);
+        final ProgressDialog progressDialog = new ProgressDialog(this,R.style.Theme_MyDialog);
         progressDialog.setMessage("Loading data....");
         progressDialog.show();
 
@@ -150,16 +158,24 @@ public class GlobalActivity extends AppCompatActivity {
             public void onResponse(String response) {
                 progressDialog.dismiss();
                 try {
-                    String arrow="\u2191";
                     JSONObject jsonObject =new JSONObject(response);
                     JSONObject globalData= jsonObject.getJSONObject("Global");
                     String name ="World";
+                    Integer yy =Integer.parseInt(globalData.getString("NewConfirmed"))-Integer.parseInt(globalData.getString("NewRecovered"))-Integer.parseInt(globalData.getString("NewDeaths"));
+                    Integer xx =Integer.parseInt(globalData.getString("TotalConfirmed"))-Integer.parseInt(globalData.getString("TotalRecovered"))-Integer.parseInt(globalData.getString("TotalDeaths"));
+                    String vo;
+                    if(yy<0)
+                        vo=down+(yy*-1);
+                    else
+                        vo=arrow+yy;
                     ListItems items = new ListItems(
                             name,
                             globalData.getString("TotalConfirmed"),
+                            String.valueOf(xx),
                             globalData.getString("TotalRecovered"),
                             globalData.getString("TotalDeaths"),
                             arrow+globalData.getString("NewConfirmed"),
+                            vo,
                             arrow+globalData.getString("NewRecovered"),
                             arrow+globalData.getString("NewDeaths")
                     );
@@ -180,11 +196,20 @@ public class GlobalActivity extends AppCompatActivity {
                         if(name2.equals(temp)){
                             temp="Macedonia";
                         }
+                        int y= Integer.parseInt(country.getString("NewConfirmed"))-Integer.parseInt(country.getString("NewRecovered"))-Integer.parseInt(country.getString("NewDeaths"));
+                        int x = Integer.parseInt(country.getString("TotalConfirmed"))-Integer.parseInt(country.getString("TotalRecovered"))-Integer.parseInt(country.getString("TotalDeaths"));
+                        String b;
+                        if(y<0)
+                            b=down+(y*-1);
+                        else
+                            b=arrow+y;
                         ListItems item = new ListItems(
                                 temp,
                                 country.getString("TotalConfirmed"),
+                                String.valueOf(x),
                                 country.getString("TotalRecovered"),
-                                country.getString("TotalDeaths"),arrow+ country.getString("NewConfirmed"),
+                                country.getString("TotalDeaths"),arrow+country.getString("NewConfirmed"),
+                                b,
                                 arrow+country.getString("NewRecovered"),
                                 arrow+country.getString("NewDeaths")
                         );

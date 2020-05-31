@@ -5,9 +5,6 @@
     <item android:id="@+id/about_dev"
         android:title="Developer"
         app:showAsAction="never"/>
-    <item android:id="@+id/logout"
-        android:title="Logout"
-        app:showAsAction="never"/>
     <item android:id="@+id/change_theme"
         android:title="Nm"
         android:icon="@drawable/nightmode"
