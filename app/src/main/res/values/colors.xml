@@ -10,4 +10,5 @@
     <color name="white">#FFFFFF</color>
     <color name="background">#1b1b26</color>
     <color name="light">#f0ece2</color>
+    <color name="dark">#121212</color>
 </resources>
