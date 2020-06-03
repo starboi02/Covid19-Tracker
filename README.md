@@ -15,16 +15,16 @@ This application is 100% safe (unlike Arogya Setu App ;) ) as it does not store 
 
 ## Acknowledgements
 
-* App Icon made by Freepik(https://www.freepik.com/) from flaticon(https://flaticon.com)
+* App Icon made by [Freepik](https://www.freepik.com/) from [flaticon](https://flaticon.com)
 
 ## Resouces used in the app
 
-* Infographic(https://www.freepik.com/free-photos-vectors/infographic) vector created by freepik(www.freepik.com).
-* Illustration(https://www.freepik.com/free-photos-vectors/illustration) vector created by freepik(www.freepik.com).
-* Infographic(https://www.freepik.com/free-photos-vectors/infographic) vector created by freepik(www.freepik.com).
-* Design(https://www.freepik.com/free-photos-vectors/design) vector created by freepik(www.freepik.com).
-* Heart(https://www.freepik.com/free-photos-vectors/heart) vector created by starline(www.freepik.com).
-* Medical(https://www.freepik.com/free-photos-vectors/medical) vector created by freepik(www.freepik.com).
-* Map(https://www.freepik.com/free-photos-vectors/map) vector created by freepik(www.freepik.com).
-* Map(https://www.freepik.com/free-photos-vectors/map) vector created by freepik(www.freepik.com).
-* Health(https://www.freepik.com/free-photos-vectors/health) vector created by freepik(www.freepik.com).
+* [Infographic vector](https://www.freepik.com/free-photos-vectors/infographic) created by [freepik](www.freepik.com).
+* [Illustration vector](https://www.freepik.com/free-photos-vectors/illustration) created by [freepik](www.freepik.com).
+* [Infographic vector](https://www.freepik.com/free-photos-vectors/infographic) created by [freepik](www.freepik.com).
+* [Design vector](https://www.freepik.com/free-photos-vectors/design) created by [freepik](www.freepik.com).
+* [Heart vector](https://www.freepik.com/free-photos-vectors/heart) created by [starline](www.freepik.com).
+* [Medical vector](https://www.freepik.com/free-photos-vectors/medical) created by [freepik](www.freepik.com).
+* [Map vector](https://www.freepik.com/free-photos-vectors/map) created by [freepik](www.freepik.com).
+* [Map vector](https://www.freepik.com/free-photos-vectors/map) created by [freepik](www.freepik.com).
+* [Health vector](https://www.freepik.com/free-photos-vectors/health) created by [freepik](www.freepik.com).
