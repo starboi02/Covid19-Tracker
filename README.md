@@ -1,6 +1,6 @@
 # Covid-19 Tracker
 
-An app to track Covid-19
+A Java based app to track Covid-19.
 This app is made with the main motive of spreading awareness and providing statistical data related to Covid-19 Pandemic.
 
 ## Using the Application
@@ -13,9 +13,15 @@ This application is 100% safe (unlike Arogya Setu App ;) ) as it does not store 
 * [Sayyam CarouselView](https://github.com/sayyam/carouselview) - For Carousel View used in the app.
 * [Intuit SSP](https://github.com/intuit/ssp) - For Screen size based text sizing.
 
-## Acknowledgements
+## JSON APIs Used
 
-* App Icon made by [Freepik](https://www.freepik.com/) from [flaticon](https://flaticon.com)
+* [Global Data](https://api.covid19api.com/summary)
+* [National Data](https://api.covid19india.org/data.json)
+* [State Data](https://api.covid19india.org/state_district_wise.json)
+* [National Stats](https://api.covid19india.org/data.json)
+* [District Data](https://api.covid19india.org/state_district_wise.json)
+* [Zones](https://api.covid19india.org/zones.json)
+* [Resources](https://api.covid19india.org/resources/resources.json)
 
 ## Resouces used in the app
 
@@ -28,3 +34,7 @@ This application is 100% safe (unlike Arogya Setu App ;) ) as it does not store 
 * [Map vector](https://www.freepik.com/free-photos-vectors/map) created by [freepik](www.freepik.com).
 * [Map vector](https://www.freepik.com/free-photos-vectors/map) created by [freepik](www.freepik.com).
 * [Health vector](https://www.freepik.com/free-photos-vectors/health) created by [freepik](www.freepik.com).
+
+## Acknowledgements
+
+* App Icon made by [Freepik](https://www.freepik.com/) from [flaticon](https://flaticon.com)
