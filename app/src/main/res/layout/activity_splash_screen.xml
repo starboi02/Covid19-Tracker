@@ -6,7 +6,7 @@
     android:background="#121212"
     android:gravity="center"
     android:layout_height="match_parent"
-    tools:context=".MainActivity"
+    tools:context=".SplashScreenActivity"
     android:padding="16dp">
 
 
@@ -15,7 +15,7 @@
         android:layout_width="263dp"
         android:layout_height="202dp"
         android:layout_marginBottom="104dp"
-        android:src="@drawable/covid19"
+        android:src="@drawable/virus_icon"
         app:layout_constraintBottom_toTopOf="@+id/textView2"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />

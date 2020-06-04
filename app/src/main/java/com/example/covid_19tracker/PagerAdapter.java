@@ -1,7 +1,5 @@
 package com.example.covid_19tracker;
 
-import android.os.Bundle;
-
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentStatePagerAdapter;
@@ -25,12 +23,12 @@ public class PagerAdapter extends FragmentStatePagerAdapter {
         {
 
             case 0:
-                Tab1 tab1 = new Tab1();
-                return tab1;
+                NationalCases nationalCases = new NationalCases();
+                return nationalCases;
             case 1:
-                Tab2 tab2 = new Tab2();
-//                tab2.setArguments(this.fragmentBundle);
-                return  tab2;
+                NationalStats nationalStats = new NationalStats();
+//                nationalStats.setArguments(this.fragmentBundle);
+                return nationalStats;
             default:
                 return null;
         }

@@ -3,18 +3,17 @@ package com.example.covid_19tracker;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.text.method.LinkMovementMethod;
 import android.widget.TextView;
 
-public class MainActivity3 extends AppCompatActivity {
+public class CovidActivity extends AppCompatActivity {
     int j=0;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         themeUtils.onActivityCreateSetTheme(this);
-        setContentView(R.layout.activity_main3);
+        setContentView(R.layout.activity_covid);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
 
         toolbar.setTitle("Covid-19 Outbreak");

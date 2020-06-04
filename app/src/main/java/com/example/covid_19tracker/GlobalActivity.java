@@ -1,31 +1,23 @@
 package com.example.covid_19tracker;
 
 
-import android.app.ActionBar;
-import android.app.Activity;
 import android.app.ProgressDialog;
-import android.content.Intent;
-import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
 import android.text.InputType;
-import android.util.JsonReader;
-import android.util.Log;
 
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
-import android.view.inputmethod.EditorInfo;
-import android.widget.Button;
 import android.view.Menu;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import androidx.annotation.NonNull;
+import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.SearchView;
 import androidx.appcompat.widget.Toolbar;
 import androidx.cardview.widget.CardView;
-import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -40,10 +32,6 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
@@ -63,6 +51,7 @@ public class GlobalActivity extends AppCompatActivity {
     private Map<String,Integer> hsh=new HashMap<>();
     private String arrow="\u2191";
     private String down="\u2193";
+    @RequiresApi(api = Build.VERSION_CODES.KITKAT)
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -111,7 +100,7 @@ public class GlobalActivity extends AppCompatActivity {
             public boolean onQueryTextChange(String newText) {
                 showList.clear();
                 if(newText.length()==0){
-                    adapter = new AdaptorActivity(listItems,getApplicationContext());
+                    adapter = new AdaptorActivityList(listItems,getApplicationContext());
                     recyclerView.setAdapter(adapter);
                 }
                 else {
@@ -128,10 +117,10 @@ public class GlobalActivity extends AppCompatActivity {
                             }
                         }
                     }
-                    adapter = new AdaptorActivity(showList, getApplicationContext());
+                    adapter = new AdaptorActivityList(showList, getApplicationContext());
                     recyclerView.setAdapter(adapter);
                     if (flag == 1) {
-                        adapter = new AdaptorActivity(empty, getApplicationContext());
+                        adapter = new AdaptorActivityList(empty, getApplicationContext());
                         recyclerView.setAdapter(adapter);
                         String message ="No Country found";
                         Toast toast= Toast.makeText(GlobalActivity.this,message, Toast.LENGTH_SHORT);
@@ -217,7 +206,7 @@ public class GlobalActivity extends AppCompatActivity {
                         hsh.put(temp,z);
                         z++;
                     }
-                    adapter = new AdaptorActivity(listItems, getApplicationContext());
+                    adapter = new AdaptorActivityList(listItems, getApplicationContext());
                     recyclerView.setAdapter(adapter);
                 } catch (JSONException e) {
                     e.printStackTrace();

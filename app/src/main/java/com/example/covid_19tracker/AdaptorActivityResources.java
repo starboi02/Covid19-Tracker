@@ -3,30 +3,24 @@ package com.example.covid_19tracker;
 import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
-import android.text.method.LinkMovementMethod;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AdapterView;
-import android.widget.Button;
-import android.widget.Filter;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import java.util.ArrayList;
 import java.util.List;
 
-public class AdaptorActivity2 extends RecyclerView.Adapter<AdaptorActivity2.ViewHolder> {
+public class AdaptorActivityResources extends RecyclerView.Adapter<AdaptorActivityResources.ViewHolder> {
 
-    private List<CatItems> CatItems;
+    private List<CategoryItems> CategoryItems;
     private Context context;
 
-    AdaptorActivity2(List<CatItems> CatItems, Context context) {
-        this.CatItems = CatItems;
+    AdaptorActivityResources(List<CategoryItems> CategoryItems, Context context) {
+        this.CategoryItems = CategoryItems;
         this.context = context;
     }
 
@@ -40,7 +34,7 @@ public class AdaptorActivity2 extends RecyclerView.Adapter<AdaptorActivity2.View
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-        final CatItems CatItem = CatItems.get(position);
+        final CategoryItems CatItem = CategoryItems.get(position);
         if(CatItem.getCategory().contains("Testing")){
             holder.image.setImageResource(R.drawable.testing);
         }
@@ -74,7 +68,7 @@ public class AdaptorActivity2 extends RecyclerView.Adapter<AdaptorActivity2.View
 
     @Override
     public int getItemCount() {
-        return CatItems.size();
+        return CategoryItems.size();
     }
 
     class ViewHolder extends RecyclerView.ViewHolder {

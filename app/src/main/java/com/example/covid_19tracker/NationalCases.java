@@ -15,6 +15,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.TextView;
+import android.widget.Toast;
 
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
@@ -37,12 +39,12 @@ import java.util.Map;
 /**
  * A simple {@link Fragment} subclass.
  * Activities that contain this fragment must implement the
- * {@link Tab1.OnFragmentInteractionListener} interface
+ * {@link NationalCases.OnFragmentInteractionListener} interface
  * to handle interaction events.
- * Use the {@link Tab1#newInstance} factory method to
+ * Use the {@link NationalCases#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class Tab1 extends Fragment {
+public class NationalCases extends Fragment {
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
@@ -70,10 +72,9 @@ public class Tab1 extends Fragment {
     private String down="\u2193";
 
 
-
     private OnFragmentInteractionListener mListener;
 
-    public Tab1() {
+    public NationalCases() {
         // Required empty public constructor
     }
 
@@ -83,11 +84,11 @@ public class Tab1 extends Fragment {
      *
      * @param param1 Parameter 1.
      * @param param2 Parameter 2.
-     * @return A new instance of fragment Tab1.
+     * @return A new instance of fragment NationalCases.
      */
     // TODO: Rename and change types and number of parameters
-    public static Tab1 newInstance(String param1, String param2) {
-        Tab1 fragment = new Tab1();
+    public static NationalCases newInstance(String param1, String param2) {
+        NationalCases fragment = new NationalCases();
         Bundle args = new Bundle();
         args.putString(ARG_PARAM1, param1);
         args.putString(ARG_PARAM2, param2);
@@ -109,7 +110,7 @@ public class Tab1 extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        View view=inflater.inflate(R.layout.fragment_tab1, container, false);
+        View view=inflater.inflate(R.layout.fragment_national_cases, container, false);
         Button btn=view.findViewById(R.id.btn_about);
         btn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -126,16 +127,12 @@ public class Tab1 extends Fragment {
         recyclerView=view.findViewById(R.id.recycler_view);
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
-
-
         return view;
-
-
     }
 
     public void distData(){
 
-        Intent intent = new Intent(getActivity(), DistActivity.class);
+        Intent intent = new Intent(getActivity(), DistrictActivity.class);
         startActivity(intent);
     }
 
@@ -147,7 +144,8 @@ public class Tab1 extends Fragment {
         StringRequest request = new StringRequest(Request.Method.GET, URL_INC, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
-                progressDialog.dismiss();
+                if(!response.isEmpty())
+                    progressDialog.dismiss();
                 try {
                     JSONObject jsonObject = new JSONObject(response);
                     JSONArray jsonArray = jsonObject.getJSONArray("cases_time_series");
@@ -203,6 +201,18 @@ public class Tab1 extends Fragment {
                     if((natCases!=null&& natRecovered!=null)&& natDeceased!=null) {
                         y = Integer.parseInt(natCases) - Integer.parseInt(natRecovered) - Integer.parseInt(natDeceased);
                     }
+                    else {
+                        String message ="Loading Data please wait";
+                        Toast toast= Toast.makeText(getContext(),message, Toast.LENGTH_SHORT);
+                        View view = toast.getView();
+                        TextView text = view.findViewById(android.R.id.message);
+                        text.setBackgroundColor(16777215);
+                        toast.show();
+                        Intent intent = new Intent(getActivity(), NationalActivity.class);
+//                        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                        startActivity(intent);
+                        getActivity().finish();
+                    }
                     String temp;
                     if(y<0)
                     temp=down+(y*-1);
@@ -245,8 +255,9 @@ public class Tab1 extends Fragment {
                         listItems.add(items);
                         z++;
                     }
-                    adapter = new AdaptorActivity(listItems,getContext());
-                    recyclerView.setAdapter(adapter);
+                    if(natCases!=null){
+                    adapter = new AdaptorActivityList(listItems,getContext());
+                    recyclerView.setAdapter(adapter);}
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }

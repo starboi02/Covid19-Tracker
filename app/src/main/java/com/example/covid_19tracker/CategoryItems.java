@@ -1,6 +1,6 @@
 package com.example.covid_19tracker;
 
-public class CatItems {
+public class CategoryItems {
     private String category;
     private String name;
     private String description;
@@ -8,7 +8,7 @@ public class CatItems {
     private String link;
 
 
-    public CatItems( String category,String name,String description,String phoneNumber,String link){
+    public CategoryItems(String category, String name, String description, String phoneNumber, String link){
         this.category = category;
         this.name=name;
         this.description=description;

@@ -7,9 +7,8 @@ import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.Button;
 
-public class MainActivity4 extends AppCompatActivity {
+public class AboutActivity extends AppCompatActivity {
 
 
 
@@ -17,7 +16,7 @@ public class MainActivity4 extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         themeUtils.onActivityCreateSetTheme(this);
-        setContentView(R.layout.activity_main4);
+        setContentView(R.layout.activity_about);
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
 
@@ -38,13 +37,6 @@ public class MainActivity4 extends AppCompatActivity {
 
         Uri uri = Uri.parse("https://www.facebook.com/varunbhardwaj.064"); // missing 'http://' will cause crashed
         Intent intent = new Intent(Intent.ACTION_VIEW, uri);
-        startActivity(intent);
-    }
-
-    public void call( View v){
-
-        Uri uri = Uri.parse("tel:" + "9319866520"); // missing 'http://' will cause crashed
-        Intent intent = new Intent(Intent.ACTION_DIAL, uri);
         startActivity(intent);
     }
 }

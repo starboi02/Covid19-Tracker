@@ -5,8 +5,8 @@
     android:id="@+id/menu_item_card_view"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:background="#e57373"
     android:orientation="vertical"
+    card_view:cardBackgroundColor="@color/background"
     android:layout_marginBottom="6dp"
     card_view:cardCornerRadius="8dp"
     card_view:cardElevation="8dp"
@@ -14,7 +14,6 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@drawable/light_round"
         android:paddingLeft="10dp"
         android:paddingRight="10dp"
         android:paddingTop="10dp"
@@ -25,27 +24,27 @@
          android:layout_width="0dp"
          android:layout_height="wrap_content"
          android:layout_weight="0.4"
-         android:background="#e57373"
+         android:background="@color/background"
          android:orientation="vertical"
          >
      <ImageView
          android:layout_width="100dp"
-         android:layout_margin="8dp"
          android:layout_height="100dp"
-         android:background="#e57373"
+         android:layout_marginTop="8dp"
+         android:background="@color/background"
          android:layout_gravity="center"
          android:id="@+id/image_type"
          />
          <LinearLayout
              android:layout_width="match_parent"
-             android:background="#e57373"
+             android:background="@color/background"
              android:layout_height="wrap_content"
              android:orientation="horizontal"
              android:weightSum="1"
              >
              <LinearLayout
                  android:layout_width="0dp"
-                 android:background="#e57373"
+                 android:background="@color/background"
                  android:layout_height="wrap_content"
                  android:layout_weight="0.5"
                  android:gravity="center"
@@ -59,7 +58,7 @@
                      android:layout_gravity="center"
                      android:layout_marginTop="8dp"
                      android:layout_marginBottom="6dp"
-                     android:background="@drawable/web"
+                     android:background="@drawable/web_icon"
                      android:scaleType="fitXY" />
              </LinearLayout>
              <LinearLayout
@@ -67,14 +66,14 @@
                  android:layout_height="match_parent"
                  android:layout_weight="0.5"
                  android:gravity="center"
-                 android:background="#e57373"
+                 android:background="@color/background"
                  >
                  <ImageView
                      android:layout_width="50dp"
                      android:layout_marginTop="8dp"
                      android:layout_marginBottom="6dp"
                      android:layout_gravity="center"
-                     android:background="@drawable/phone_logo"
+                     android:background="@drawable/phone_icon"
                      android:layout_marginRight="8dp"
                      android:scaleType="fitXY"
                      android:id="@+id/phoneNumber"
@@ -86,46 +85,32 @@
       <LinearLayout
           android:layout_width="0dp"
           android:layout_weight="0.6"
-          android:background="#e57373"
+          android:background="@color/background"
           android:layout_height="wrap_content"
           android:orientation="vertical"
           >
-<!--     <TextView-->
-<!--         android:layout_width="match_parent"-->
-<!--         android:padding="8dp"-->
-<!--         android:layout_height="wrap_content"-->
-<!--         android:paddingHorizontal="8dp"-->
-<!--         android:paddingVertical="8dp"-->
-<!--         android:id="@+id/category"-->
-<!--         android:textColor="#000000"-->
-<!--         android:background="@drawable/round4"-->
-<!--         android:gravity="center"-->
-<!--         android:textStyle="bold"-->
-<!--         android:textSize="16sp"-->
-<!--         android:text="Category"-->
-<!--         />-->
         <TextView
             android:layout_width="match_parent"
             android:layout_marginTop="16dp"
-            android:textColor="#000000"
+            android:textColor="#FFFFFF"
             android:gravity="center"
             android:padding="8dp"
             android:layout_height="wrap_content"
             android:id="@+id/nameOforg"
             android:fontFamily="@font/latoregular"
-            android:background="@drawable/round4"
+            android:background="@color/background"
             android:textSize="15sp"
             />   
      <TextView
          android:layout_width="match_parent"
          android:layout_marginTop="16dp"
          android:padding="8dp"
-         android:textColor="#000000"
+         android:textColor="#FFFFFF"
          android:gravity="center"
          android:fontFamily="@font/latoregular"
          android:layout_height="wrap_content"
          android:id="@+id/description"
-         android:background="@drawable/round4"
+         android:background="@color/background"
          android:textSize="15sp"
          android:layout_marginBottom="8dp"
          />

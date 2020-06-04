@@ -144,6 +144,7 @@
                  android:layout_width="130dp"
                  android:layout_height="130dp"
                  android:src="@drawable/wash_hands"
+                 android:padding="8dp"
                  android:layout_marginHorizontal="16dp"
                  android:layout_gravity="center"
                  />
@@ -167,6 +168,7 @@
                  android:layout_width="130dp"
                  android:layout_height="130dp"
                  android:src="@drawable/cough_elbow"
+                 android:padding="8dp"
                  android:layout_marginHorizontal="16dp"
                  android:layout_gravity="center"
                  />
@@ -174,6 +176,7 @@
                  android:layout_width="130dp"
                  android:layout_gravity="center"
                  android:layout_height="130dp"
+                 android:padding="8dp"
                  android:layout_marginHorizontal="16dp"
                  android:src="@drawable/social_distance"
                  />

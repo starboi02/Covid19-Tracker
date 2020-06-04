@@ -4,21 +4,19 @@ import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Filter;
 import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import java.util.ArrayList;
 import java.util.List;
 
-public class AdaptorActivity extends RecyclerView.Adapter<AdaptorActivity.ViewHolder> {
+public class AdaptorActivityList extends RecyclerView.Adapter<AdaptorActivityList.ViewHolder> {
 
     private List<ListItems> listItems;
     private List<ListItems> searchList;
     private Context context;
 
-    AdaptorActivity(List<ListItems> listItems, Context context) {
+    AdaptorActivityList(List<ListItems> listItems, Context context) {
         this.listItems = listItems;
         this.context = context;
     }

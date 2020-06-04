@@ -1,22 +1,19 @@
 package com.example.covid_19tracker;
 
 import android.os.Bundle;
-import android.util.DisplayMetrics;
 import android.view.View;
 import android.widget.ExpandableListAdapter;
 import android.widget.ExpandableListView;
 import android.widget.ImageView;
-import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.List;
 
-public class ActivityFaq extends AppCompatActivity {
+public class ActivityFAQs extends AppCompatActivity {
 
     ExpandableListView expandableListView;
     ImageView drop ;
@@ -27,7 +24,7 @@ public class ActivityFaq extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         themeUtils.onActivityCreateSetTheme(this);
-        setContentView(R.layout.activity_database);
+        setContentView(R.layout.activity_faqs);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
 
         toolbar.setTitle("Covid-19 FAQs");

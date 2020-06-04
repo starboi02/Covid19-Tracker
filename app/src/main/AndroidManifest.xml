@@ -6,28 +6,29 @@
     <application
 
         android:allowBackup="true"
-        android:icon="@mipmap/ic_launcher"
+        android:icon="@mipmap/ic_icon"
         android:label="@string/app_name"
-        android:roundIcon="@drawable/covid19"
+        android:roundIcon="@mipmap/ic_icon"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".MainActivity" android:theme="@style/Theme.AppCompat.NoActionBar">
+        <activity android:name=".SplashScreenActivity" android:theme="@style/Theme.AppCompat.NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".MainActivity2" android:parentActivityName=".DataActivity">
+        <activity android:name=".NationalActivity" android:parentActivityName=".DataActivity">
+
         </activity>
-        <activity android:name=".MainActivity3" android:parentActivityName=".MainActivity2"></activity>
-        <activity android:name=".MainActivity4" android:parentActivityName=".MainActivity2"></activity>
-        <activity android:name=".DataActivity" android:parentActivityName=".MainActivity">
+        <activity android:name=".CovidActivity" android:parentActivityName=".NationalActivity"></activity>
+        <activity android:name=".AboutActivity" android:parentActivityName=".NationalActivity"></activity>
+        <activity android:name=".DataActivity" android:parentActivityName=".SplashScreenActivity">
         </activity>
-        <activity android:name=".DistActivity" android:parentActivityName=".MainActivity2"/>
+        <activity android:name=".DistrictActivity" android:parentActivityName=".NationalActivity"/>
         <activity android:name=".GlobalActivity" android:parentActivityName=".DataActivity"/>
         <activity android:name=".AdvisoryActivity" android:parentActivityName=".DataActivity"/>
-        <activity android:name=".ActivityFaq" android:parentActivityName=".DataActivity"/>
+        <activity android:name=".ActivityFAQs" android:parentActivityName=".DataActivity"/>
     </application>
 
 </manifest>

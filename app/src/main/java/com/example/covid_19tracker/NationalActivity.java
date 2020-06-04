@@ -1,30 +1,24 @@
 package com.example.covid_19tracker;
 
-import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.PorterDuff;
 import android.net.Uri;
 import android.os.Bundle;
-import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
-import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentActivity;
-import androidx.fragment.app.FragmentManager;
-import androidx.fragment.app.FragmentTransaction;
 import androidx.viewpager.widget.ViewPager;
 
 import com.google.android.material.tabs.TabLayout;
 
-public class MainActivity2 extends AppCompatActivity implements Tab1.OnFragmentInteractionListener,Tab2.OnFragmentInteractionListener{
+public class NationalActivity extends AppCompatActivity implements NationalCases.OnFragmentInteractionListener, NationalStats.OnFragmentInteractionListener{
 
     private static int j;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         themeUtils.onActivityCreateSetTheme(this);
-        setContentView(R.layout.activity_main2);
+        setContentView(R.layout.activity_national);
 
 //        Intent mIntent = getIntent();
 //        j = mIntent.getIntExtra("ThemeValue", 222);
@@ -32,7 +26,7 @@ public class MainActivity2 extends AppCompatActivity implements Tab1.OnFragmentI
 //
 //        Bundle b = new Bundle();
 //        b.putInt("Theme", j);
-//        Tab2 fragment =new Tab2();
+//        NationalStats fragment =new NationalStats();
 //        fragment.setArguments(b);
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);

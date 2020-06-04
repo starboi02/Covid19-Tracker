@@ -15,7 +15,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.google.firebase.auth.FirebaseAuth;
+//import com.google.firebase.auth.FirebaseAuth;
 import com.synnapps.carouselview.CarouselView;
 import com.synnapps.carouselview.ImageListener;
 
@@ -38,8 +38,6 @@ public class DataActivity extends AppCompatActivity {
         toolbar.setTitle("Covid-19 Tracker");
         setSupportActionBar(toolbar);
 
-//        linearLayout=findViewById(R.id.linearLayout);
-//        linearLayout.setBackgroundResource(R.color.background);
         carouselView = findViewById(R.id.carouselView);
         carouselView.setPageCount(sampleImages.length);
         carouselView.setImageListener(imageListener);
@@ -50,6 +48,7 @@ public class DataActivity extends AppCompatActivity {
         @Override
         public void setImageForPosition(int position, ImageView imageView) {
             imageView.setImageResource(sampleImages[position]);
+            imageView.setScaleType(ImageView.ScaleType.FIT_XY);
         }
     };
 
@@ -87,18 +86,16 @@ public class DataActivity extends AppCompatActivity {
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
 
         if(item.getItemId()==R.id.about_dev){
-            Intent intent2 = new Intent(DataActivity.this, MainActivity4.class);
+            Intent intent2 = new Intent(DataActivity.this, AboutActivity.class);
             startActivity(intent2);
         }
         else if( item.getItemId()== R.id.change_theme){
             if(j%2!=0) {
                 themeUtils.changeToTheme(this, themeUtils.LIGHT);
-//                linearLayout.setBackgroundResource(R.color.light);
                 j++;
             }
             else {
                 themeUtils.changeToTheme(this, themeUtils.DARK);
-//                linearLayout.setBackgroundResource(R.color.background);
                 j++;
             }
         }
@@ -107,13 +104,13 @@ public class DataActivity extends AppCompatActivity {
     }
     public void aboutCovid19( View v){
 
-        Intent intent = new Intent(DataActivity.this, MainActivity3.class);
+        Intent intent = new Intent(DataActivity.this, CovidActivity.class);
         intent.putExtra("ThemeValue", j);
         startActivity(intent);
     }
     public void National( View v){
 
-        Intent intent = new Intent(DataActivity.this, MainActivity2.class);
+        Intent intent = new Intent(DataActivity.this, NationalActivity.class);
 //        intent.putExtra("ThemeValue", j);
         startActivity(intent);
     }
@@ -132,7 +129,7 @@ public class DataActivity extends AppCompatActivity {
         startActivity(intent);
     }
     public void faq( View v){
-        Intent intent = new Intent(DataActivity.this, ActivityFaq.class);
+        Intent intent = new Intent(DataActivity.this, ActivityFAQs.class);
         startActivity(intent);
     }
 }

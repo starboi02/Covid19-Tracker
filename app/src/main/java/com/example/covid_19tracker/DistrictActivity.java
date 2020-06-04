@@ -5,15 +5,12 @@ import androidx.appcompat.widget.Toolbar;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import android.app.LauncherActivity;
 import android.app.ProgressDialog;
 import android.graphics.Color;
 import android.os.Bundle;
-import android.text.Layout;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
-import android.widget.LinearLayout;
 import android.widget.Spinner;
 import android.widget.TextView;
 import com.android.volley.DefaultRetryPolicy;
@@ -32,7 +29,7 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
-public class DistActivity extends AppCompatActivity {
+public class DistrictActivity extends AppCompatActivity {
 
     Spinner spinner;
     Spinner spinner_district;
@@ -43,14 +40,14 @@ public class DistActivity extends AppCompatActivity {
     ArrayList<String> DistName;
     private RecyclerView recyclerView;
     private RecyclerView.Adapter adapter;
-    private List<CatItems> catItems;
+    private List<CategoryItems> categoryItems;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         themeUtils.onActivityCreateSetTheme(this);
-        setContentView(R.layout.activity_dist);
+        setContentView(R.layout.activity_district);
         StateName = new ArrayList<>();
         DistName = new ArrayList<>();
         spinner = (Spinner) findViewById(R.id.spinner);
@@ -96,7 +93,7 @@ public class DistActivity extends AppCompatActivity {
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
 
-        catItems=new ArrayList<>();
+        categoryItems =new ArrayList<>();
     }
 
     public void setData(final String dist, final String state){
@@ -104,6 +101,7 @@ public class DistActivity extends AppCompatActivity {
         final TextView dist_active = findViewById(R.id.inc_active);
         final TextView dist_recovered =findViewById(R.id.inc_recovered);
         final TextView dist_dead = findViewById(R.id.inc_deceased);
+        final TextView dist_newActive= findViewById(R.id.inc_new);
 
         RequestQueue requestQ=Volley.newRequestQueue(getApplicationContext());
         StringRequest stringReq = new StringRequest(Request.Method.GET, URL_zon, new Response.Listener<String>() {
@@ -159,9 +157,18 @@ public class DistActivity extends AppCompatActivity {
                             JSONObject delta= district.getJSONObject("delta");
 
                             String c="\u2191";
+                            String down="\u2193";
                             dist_active.setText(district.getString("confirmed") +" (" + c + delta.getString("confirmed") +")");
                             dist_recovered.setText(district.getString("recovered") +" (" + c + delta.getString("recovered") +")");
                             dist_dead.setText(district.getString("deceased") +" (" + c + delta.getString("deceased") +")");
+                            int  x = Integer.parseInt(district.getString("confirmed")) - Integer.parseInt(district.getString("recovered")) - Integer.parseInt(district.getString("deceased"));
+                            int y = Integer.parseInt(delta.getString("confirmed")) - Integer.parseInt(delta.getString("recovered")) - Integer.parseInt(delta.getString("deceased"));
+                            String temp;
+                            if(y<0)
+                                temp=(y*-1) + down;
+                            else
+                                temp=c+ y;
+                            dist_newActive.setText(x +" (" + temp +")");
 
                         }
                     }
@@ -197,7 +204,7 @@ public class DistActivity extends AppCompatActivity {
                         String key = iter.next();
                         StateName.add(key);
                     }
-                    ArrayAdapter arrayAdapter =new ArrayAdapter<>(DistActivity.this,android.R.layout.simple_spinner_dropdown_item, StateName);
+                    ArrayAdapter arrayAdapter =new ArrayAdapter<>(DistrictActivity.this,android.R.layout.simple_spinner_dropdown_item, StateName);
                     arrayAdapter.setDropDownViewResource(R.layout.custom_spinner_item);
                     spinner.setAdapter(arrayAdapter);
                 } catch (JSONException e) {
@@ -239,7 +246,7 @@ public class DistActivity extends AppCompatActivity {
                             }
                         }
                     }
-                    ArrayAdapter arrayAdapter2= new ArrayAdapter<String>(DistActivity.this, android.R.layout.simple_spinner_dropdown_item, DistName);
+                    ArrayAdapter arrayAdapter2= new ArrayAdapter<String>(DistrictActivity.this, android.R.layout.simple_spinner_dropdown_item, DistName);
                     arrayAdapter2.setDropDownViewResource(R.layout.custom_spinner_item);
                     spinner_district.setAdapter(arrayAdapter2);
                 } catch (JSONException e) {
@@ -269,35 +276,35 @@ public class DistActivity extends AppCompatActivity {
                 try{
                     JSONObject jsonObject =new JSONObject(response);
                     JSONArray jsonArray = jsonObject.getJSONArray("resources");
-                    catItems.clear();
+                    categoryItems.clear();
                     for(int i=0;i<jsonArray.length();i++){
                         JSONObject resource=jsonArray.getJSONObject(i);
                         if(resource.getString("city").equals("Gurgaon") && dist.equals("Gurugram")){
                             String phoneNumber=resource.getString("phonenumber");
-                            CatItems items =new CatItems(
+                            CategoryItems items =new CategoryItems(
                                     resource.getString("category"),
                                     resource.getString("nameoftheorganisation"),
                                     resource.getString("descriptionandorserviceprovided"),
                                     phoneNumber,
                                     resource.getString("contact")
                             );
-                            catItems.add(items);
+                            categoryItems.add(items);
                         }
                         else if(resource.getString("city").equals(dist) || resource.getString("city").equals(state)){
                             String phoneNumber=resource.getString("phonenumber");
-                            CatItems items =new CatItems(
+                            CategoryItems items =new CategoryItems(
                                     resource.getString("category"),
                                     resource.getString("nameoftheorganisation"),
                                     resource.getString("descriptionandorserviceprovided"),
                                     phoneNumber,
                                     resource.getString("contact")
                             );
-                            catItems.add(items);
+                            categoryItems.add(items);
                         }
-                        if(catItems.size()==10)
+                        if(categoryItems.size()==10)
                             break;
                     }
-                    adapter = new AdaptorActivity2(catItems, getApplicationContext());
+                    adapter = new AdaptorActivityResources(categoryItems, getApplicationContext());
                     recyclerView.setAdapter(adapter);
                 } catch (JSONException e) {
                     e.printStackTrace();

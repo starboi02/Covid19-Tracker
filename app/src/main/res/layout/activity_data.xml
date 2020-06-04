@@ -2,7 +2,6 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:id="@+id/linearLayout"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical">
     <androidx.appcompat.widget.Toolbar
@@ -27,7 +26,7 @@
             <com.synnapps.carouselview.CarouselView
                 android:id="@+id/carouselView"
                 android:layout_width="match_parent"
-                android:layout_height="290dp"
+                android:layout_height="270dp"
                 app:fillColor="#FFFFFFFF"
                 app:radius="3dp"
                 app:pageColor="#00000000"
@@ -43,7 +42,6 @@
                 android:layout_marginBottom="32dp"
                 android:layout_marginTop="32dp"
                 android:layout_gravity="center"/>
-
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="120dp"
