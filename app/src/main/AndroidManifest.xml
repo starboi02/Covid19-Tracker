@@ -18,9 +18,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".NationalActivity" android:parentActivityName=".DataActivity">
-
-        </activity>
+        <activity android:name=".NationalActivity" android:parentActivityName=".DataActivity"/>
         <activity android:name=".CovidActivity" android:parentActivityName=".NationalActivity"></activity>
         <activity android:name=".AboutActivity" android:parentActivityName=".NationalActivity"></activity>
         <activity android:name=".DataActivity" android:parentActivityName=".SplashScreenActivity">
