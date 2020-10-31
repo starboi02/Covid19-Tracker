@@ -11,7 +11,8 @@ This app is made with the main motive of spreading awareness and providing stati
 
 ![](https://scontent-del1-1.xx.fbcdn.net/v/t1.0-9/101326788_1945462628917524_5148219612285894656_o.jpg?_nc_cat=107&_nc_sid=b9115d&_nc_ohc=nR4qPqyAN9MAX-5Y2md&_nc_ht=scontent-del1-1.xx&oh=0091e5425284b6eb767e33d84a844a0d&oe=5F999ED7)
 
-![](https://imgur.com/Y47UAr2)
+![photo](https://user-images.githubusercontent.com/56213465/97784751-c7883880-1bc6-11eb-9148-05a75fa16914.jpg)
+
 
 ## Using the Application
 
