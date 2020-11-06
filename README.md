@@ -5,13 +5,19 @@ This app is made with the main motive of spreading awareness and providing stati
 
 ## Screenshots
 
-![](https://scontent-del1-1.xx.fbcdn.net/v/t1.0-9/102575414_1945462302250890_631469057048051712_o.jpg?_nc_cat=111&_nc_sid=b9115d&_nc_ohc=xwB9iaNCp8EAX_ROVlf&_nc_ht=scontent-del1-1.xx&oh=aa0604d0ecc39df6cf96774d01c69d05&oe=5F9B94BA)
+![](https://user-images.githubusercontent.com/58038202/98368539-888e3300-205d-11eb-9554-240e357527ec.jpeg)
 
-![](https://scontent-del1-1.xx.fbcdn.net/v/t1.0-9/102669281_1945462575584196_9153526827715657728_o.jpg?_nc_cat=105&_nc_sid=b9115d&_nc_ohc=5E9Hk0Fp3xEAX_pctvG&_nc_ht=scontent-del1-1.xx&oh=abcfcf9c6fef15bc728ba3569aaba516&oe=5F9ABCAF)
 
-![](https://scontent-del1-1.xx.fbcdn.net/v/t1.0-9/101326788_1945462628917524_5148219612285894656_o.jpg?_nc_cat=107&_nc_sid=b9115d&_nc_ohc=nR4qPqyAN9MAX-5Y2md&_nc_ht=scontent-del1-1.xx&oh=0091e5425284b6eb767e33d84a844a0d&oe=5F999ED7)
+![](https://user-images.githubusercontent.com/58038202/98368590-9f348a00-205d-11eb-98dc-e76393619164.jpeg)
 
-![photo](https://user-images.githubusercontent.com/56213465/97784751-c7883880-1bc6-11eb-9148-05a75fa16914.jpg)
+
+![](https://user-images.githubusercontent.com/58038202/98368640-b2dff080-205d-11eb-8c3b-caea336af987.jpeg)
+
+
+![](https://user-images.githubusercontent.com/58038202/98368729-cee39200-205d-11eb-9ad9-c2207d1e2d07.jpeg)
+
+
+![](https://user-images.githubusercontent.com/58038202/98368764-e0c53500-205d-11eb-8227-50ff9d31dc36.jpeg)
 
 
 ## Using the Application
